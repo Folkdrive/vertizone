@@ -1,0 +1,5 @@
+<!-- Placeholder for Vertizone Logo SVG -->
+<svg width="120" height="40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" fill="#0078d4"/>
+  <text x="60" y="25" font-size="18" fill="#fff" text-anchor="middle" font-family="Arial">Vertizone</text>
+</svg>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VertiZone | Data Engineering & Analytics</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body class="design-1">
+    <!-- Design Toggle -->
+    <div class="design-toggle">
+        <div class="toggle-container">
+            <button class="toggle-btn active" data-design="1">
+                <i class="fas fa-network-wired"></i> Architecture
+            </button>
+            <button class="toggle-btn" data-design="2">
+                <i class="fas fa-chart-line"></i> Analytics
+            </button>
+            <button class="toggle-btn" data-design="3">
+                <i class="fas fa-brain"></i> AI Future
+            </button>
+        </div>
+    </div>
+
+    <!-- Design 1: Gridlines/Architecture -->
+    <div class="design-section design-1-section">
+        <header class="main-header header-design-1">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <div class="grid-logo">
+                                <div class="grid-square"></div>
+                                <div class="grid-square"></div>
+                                <div class="grid-square"></div>
+                                <div class="grid-square"></div>
+                            </div>
+                        </div>
+                        <span class="logo-text">VERTIZONE</span>
+                    </div>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="#" class="nav-link"><span class="link-text">Data Engineering</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Cloud Solutions</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Case Studies</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Consulting</span></a></li>
+                        <li><a href="#" class="nav-link btn-contact">Contact</a></li>
+                    </ul>
+                    
+                    <button class="menu-toggle">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Grid Architecture Visualization -->
+        <div class="grid-visualization">
+            <div class="grid-line line-horizontal"></div>
+            <div class="grid-line line-vertical"></div>
+            <div class="grid-node node-1">
+                <div class="node-pulse"></div>
+                <div class="node-content">
+                    <i class="fas fa-database"></i>
+                    <span>Sources</span>
+                </div>
+            </div>
+            <div class="grid-node node-2">
+                <div class="node-pulse"></div>
+                <div class="node-content">
+                    <i class="fas fa-code-branch"></i>
+                    <span>ETL</span>
+                </div>
+            </div>
+            <div class="grid-node node-3">
+                <div class="node-pulse"></div>
+                <div class="node-content">
+                    <i class="fas fa-server"></i>
+                    <span>Warehouse</span>
+                </div>
+            </div>
+            <div class="grid-node node-4">
+                <div class="node-pulse"></div>
+                <div class="node-content">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>BI</span>
+                </div>
+            </div>
+            <div class="data-stream stream-1"></div>
+            <div class="data-stream stream-2"></div>
+            <div class="data-stream stream-3"></div>
+        </div>
+
+        <section class="hero hero-design-1">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-text">ENTERPRISE DATA ARCHITECTURE</span>
+                        <div class="badge-line"></div>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        <span class="title-line">Precision Data</span>
+                        <span class="title-line">Pipeline Engineering</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        We architect scalable, robust data infrastructure using AWS, Snowflake, and modern ETL tools to transform your data into actionable intelligence.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Data Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50ms</div>
+                            <div class="stat-label">Processing Speed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">PB</div>
+                            <div class="stat-label">Data Processed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="#" class="btn btn-arch">
+                            <span class="btn-text">View Architecture</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <span class="btn-text">Case Studies</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services services-design-1">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Data Engineering Services</h2>
+                    <p class="section-description">Building the foundation for data-driven decision making</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cloud"></i>
+                            <div class="icon-background"></div>
+                        </div>
+                        <h3>Cloud Data Platforms</h3>
+                        <p>AWS, Azure, GCP data solutions with Snowflake and Redshift integration</p>
+                        <div class="service-tech">
+                            <span>AWS</span>
+                            <span>Snowflake</span>
+                            <span>Redshift</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                            <div class="icon-background"></div>
+                        </div>
+                        <h3>Real-time ETL</h3>
+                        <p>Streaming data pipelines with Kafka, Kinesis, and Spark processing</p>
+                        <div class="service-tech">
+                            <span>Kafka</span>
+                            <span>Spark</span>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-network"></i>
+                            <div class="icon-background"></div>
+                        </div>
+                        <h3>Data Governance</h3>
+                        <p>Master data management, quality, and compliance frameworks</p>
+                        <div class="service-tech">
+                            <span>MDM</span>
+                            <span>DQ</span>
+                            <span>GDPR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-stack tech-design-1">
+            <div class="container">
+                <h3>Technology Partners</h3>
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+                    <div class="tech-item"><i class="fas fa-snowflake"></i><span>Snowflake</span></div>
+                    <div class="tech-item"><i class="fab fa-python"></i><span>Python</span></div>
+                    <div class="tech-item"><i class="fab fa-microsoft"></i><span>Azure</span></div>
+                    <div class="tech-item"><i class="fas fa-database"></i><span>Redshift</span></div>
+                    <div class="tech-item"><i class="fas fa-chart-bar"></i><span>Tableau</span></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Design 2: White & Elegant -->
+    <div class="design-section design-2-section">
+        <header class="main-header header-design-2">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="logo">
+                        <div class="logo-elegant">
+                            <div class="elegant-circle"></div>
+                            <div class="elegant-line"></div>
+                        </div>
+                        <span class="logo-text">VertiZone</span>
+                    </div>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="#" class="nav-link"><span class="link-text">Analytics</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Business Intelligence</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Insights</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Success Stories</span></a></li>
+                        <li><a href="#" class="btn-elegant">Get Started</a></li>
+                    </ul>
+                    
+                    <button class="menu-toggle">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Animated Dashboard Preview -->
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Executive Dashboard</div>
+                <div class="dashboard-actions">
+                    <span class="status active"><i class="fas fa-circle"></i> Live</span>
+                    <span class="time">Updated 2 min ago</span>
+                </div>
+            </div>
+            <div class="dashboard-content">
+                <div class="chart-container">
+                    <div class="chart-row">
+                        <div class="metric">
+                            <div class="metric-value">$4.2M</div>
+                            <div class="metric-label">Q3 Revenue</div>
+                            <div class="metric-trend up">+12%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">89%</div>
+                            <div class="metric-label">Growth</div>
+                            <div class="metric-trend up">+8%</div>
+                        </div>
+                    </div>
+                    <div class="chart-visual">
+                        <div class="chart-bar" style="height: 70%;"></div>
+                        <div class="chart-bar" style="height: 85%;"></div>
+                        <div class="chart-bar" style="height: 60%;"></div>
+                        <div class="chart-bar" style="height: 90%;"></div>
+                        <div class="chart-bar" style="height: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="hero hero-design-2">
+            <div class="elegant-background">
+                <div class="bg-element element-1"></div>
+                <div class="bg-element element-2"></div>
+                <div class="bg-element element-3"></div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-text">BUSINESS INTELLIGENCE EXCELLENCE</span>
+                        <div class="badge-glow"></div>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        <span class="title-line">Transform Data Into</span>
+                        <span class="title-line">Business Advantage</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Premium analytics and BI solutions that deliver actionable insights through elegant dashboards and sophisticated reporting.
+                    </p>
+                    
+                    <div class="hero-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Real-time Dashboards</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Predictive Analytics</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Custom Reporting</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="#" class="btn btn-elegant">
+                            <span class="btn-text">Schedule Demo</span>
+                            <i class="fas fa-play-circle"></i>
+                        </a>
+                        <a href="#" class="btn btn-elegant-outline">
+                            <span class="btn-text">Download Report</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="services services-design-2">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Analytics Solutions</h2>
+                    <p class="section-description">Sophisticated data visualization and business intelligence</p>
+                </div>
+                
+                <div class="services-elegant">
+                    <div class="elegant-service">
+                        <div class="service-number">01</div>
+                        <div class="service-content">
+                            <h3>Interactive Dashboards</h3>
+                            <p>Real-time visualization with Power BI, Tableau, and custom analytics platforms</p>
+                            <div class="service-stats">
+                                <span><i class="fas fa-bolt"></i> Real-time</span>
+                                <span><i class="fas fa-mobile-alt"></i> Mobile</span>
+                                <span><i class="fas fa-shield-alt"></i> Secure</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="elegant-service">
+                        <div class="service-number">02</div>
+                        <div class="service-content">
+                            <h3>Advanced Analytics</h3>
+                            <p>Predictive modeling, machine learning insights, and statistical analysis</p>
+                            <div class="service-stats">
+                                <span><i class="fas fa-brain"></i> AI/ML</span>
+                                <span><i class="fas fa-chart-line"></i> Predictive</span>
+                                <span><i class="fas fa-cogs"></i> Automated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Design 3: Futuristic Cyber -->
+    <div class="design-section design-3-section">
+        <header class="main-header header-design-3">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="logo">
+                        <div class="logo-cyber">
+                            <div class="cyber-core"></div>
+                            <div class="cyber-ring ring-1"></div>
+                            <div class="cyber-ring ring-2"></div>
+                        </div>
+                        <span class="logo-text">VERTIZONE</span>
+                    </div>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="#" class="nav-link"><span class="link-text">AI Engineering</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">ML Ops</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Future Tech</span></a></li>
+                        <li><a href="#" class="nav-link"><span class="link-text">Innovation</span></a></li>
+                        <li><a href="#" class="btn-cyber">Join Future</a></li>
+                    </ul>
+                    
+                    <button class="menu-toggle">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- 3D Data Visualization Canvas -->
+        <div class="cyber-canvas" id="cyberCanvas"></div>
+
+        <!-- Particle System -->
+        <div class="particle-system">
+            <div class="particle-layer layer-1"></div>
+            <div class="particle-layer layer-2"></div>
+            <div class="particle-layer layer-3"></div>
+        </div>
+
+        <section class="hero hero-design-3">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-text">NEXT-GEN DATA INTELLIGENCE</span>
+                        <div class="badge-cyber-glow"></div>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        <span class="title-line">AI-Powered</span>
+                        <span class="title-line cyber-highlight">Data Futures</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Transcend traditional analytics with neural networks, quantum-ready architecture, and immersive data experiences.
+                    </p>
+                    
+                    <div class="cyber-stats">
+                        <div class="cyber-stat">
+                            <div class="stat-value">0.001s</div>
+                            <div class="stat-label">AI Response</div>
+                            <div class="stat-bar">
+                                <div class="bar-fill"></div>
+                            </div>
+                        </div>
+                        <div class="cyber-stat">
+                            <div class="stat-value">99.99%</div>
+                            <div class="stat-label">Accuracy</div>
+                            <div class="stat-bar">
+                                <div class="bar-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="#" class="btn btn-cyber">
+                            <span class="btn-text">Launch AI Demo</span>
+                            <i class="fas fa-rocket"></i>
+                            <div class="btn-glow"></div>
+                        </a>
+                        <a href="#" class="btn btn-cyber-outline">
+                            <span class="btn-text">Experience VR</span>
+                            <i class="fas fa-vr-cardboard"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Neural Network Visualization -->
+        <div class="neural-network">
+            <div class="neuron-layer layer-input">
+                <div class="neuron"></div>
+                <div class="neuron"></div>
+                <div class="neuron"></div>
+            </div>
+            <div class="neuron-layer layer-hidden">
+                <div class="neuron"></div>
+                <div class="neuron"></div>
+                <div class="neuron"></div>
+                <div class="neuron"></div>
+            </div>
+            <div class="neuron-layer layer-output">
+                <div class="neuron"></div>
+                <div class="neuron"></div>
+            </div>
+            <div class="synapse"></div>
+            <div class="synapse"></div>
+            <div class="synapse"></div>
+        </div>
+
+        <!-- Services -->
+        <section class="services services-design-3">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Future Data Technologies</h2>
+                    <p class="section-description">Pioneering the next evolution of data intelligence</p>
+                </div>
+                
+                <div class="services-cyber">
+                    <div class="cyber-service-card">
+                        <div class="card-header">
+                            <div class="cyber-icon">
+                                <i class="fas fa-brain"></i>
+                                <div class="icon-cyber-glow"></div>
+                            </div>
+                            <h3>Neural Analytics</h3>
+                        </div>
+                        <p>Deep learning models for predictive intelligence and pattern recognition</p>
+                        <div class="tech-tags">
+                            <span class="tag-cyber">TensorFlow</span>
+                            <span class="tag-cyber">PyTorch</span>
+                            <span class="tag-cyber">AI/ML</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cyber-service-card">
+                        <div class="card-header">
+                            <div class="cyber-icon">
+                                <i class="fas fa-bolt"></i>
+                                <div class="icon-cyber-glow"></div>
+                            </div>
+                            <h3>Quantum Ready</h3>
+                        </div>
+                        <p>Next-generation data processing with quantum computing architecture</p>
+                        <div class="tech-tags">
+                            <span class="tag-cyber">Q#</span>
+                            <span class="tag-cyber">Quantum</span>
+                            <span class="tag-cyber">HPC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Common Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>VERTIZONE</h3>
+                    <p>Data Engineering, Analytics & AI Solutions</p>
+                </div>
+                <div class="footer-contact">
+                    <p>Ready to transform your data strategy?</p>
+                    <a href="#" class="btn-footer">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
