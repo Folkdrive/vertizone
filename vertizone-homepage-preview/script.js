@@ -1,468 +1,218 @@
-// Main JavaScript for Three Designs
+// Design Switching and Initialization
 document.addEventListener('DOMContentLoaded', function() {
-    // Design Toggle
-    const toggleButtons = document.querySelectorAll('.toggle-btn');
-    const body = document.body;
+    // Initialize with Design 1
+    initializeDesign('1');
     
-    toggleButtons.forEach(button => {
+    // Design selector buttons
+    const designButtons = document.querySelectorAll('.design-btn');
+    
+    designButtons.forEach(button => {
         button.addEventListener('click', function() {
             const design = this.getAttribute('data-design');
-            
-            // Update active button
-            toggleButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Update body class
-            body.className = '';
-            body.classList.add(`design-${design}`);
-            
-            // Update CSS variables
-            updateDesignVariables(design);
-            
-            // Initialize design-specific animations
-            initDesignAnimations(design);
+            switchDesign(design);
         });
     });
     
-    // Mobile Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
-    
-    // Close menu when clicking links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (menuToggle) menuToggle.classList.remove('active');
-            if (navMenu) navMenu.classList.remove('active');
-        });
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '3') {
+            switchDesign(e.key);
+        }
     });
     
-    // Initialize first design
-    updateDesignVariables('1');
-    initDesignAnimations('1');
-    
-    // Initialize 3D visualization for cyber design
-    if (body.classList.contains('design-3')) {
-        initCyberVisualization();
-    }
-    
-    // Animate stats
-    animateStats();
-    
-    // Parallax effects
-    initParallax();
+    // Add smooth animations
+    addAnimationEffects();
 });
 
-function updateDesignVariables(design) {
-    const root = document.documentElement;
-    const schemes = {
-        '1': {
-            'primary': '#1b5e20',
-            'secondary': '#0d47a1',
-            'accent': '#ff6f00'
-        },
-        '2': {
-            'primary': '#047857',
-            'secondary': '#7c3aed',
-            'accent': '#d97706'
-        },
-        '3': {
-            'primary': '#00ffff',
-            'secondary': '#ff00ff',
-            'accent': '#ffff00'
+function initializeDesign(design) {
+    // Set body class
+    document.body.className = `design-${design}`;
+    
+    // Update active button
+    document.querySelectorAll('.design-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-design') === design) {
+            btn.classList.add('active');
         }
-    };
+    });
     
-    const scheme = schemes[design];
-    if (scheme) {
-        Object.entries(scheme).forEach(([key, value]) => {
-            root.style.setProperty(`--design-${design}-${key}`, value);
-        });
-    }
-}
-
-function initDesignAnimations(design) {
-    // Stop all previous animations
-    cancelAnimationFrame(window.animationId);
-    
-    // Design-specific initializations
+    // Initialize design-specific effects
     switch(design) {
         case '1':
-            initGridAnimations();
+            initGridDesign();
             break;
         case '2':
-            initDashboardAnimations();
+            initElegantDesign();
             break;
         case '3':
-            initCyberAnimations();
-            initCyberVisualization();
+            initCyberDesign();
             break;
     }
     
-    // Common animations
-    animateServiceCards();
-    animateTechItems();
+    // Animate elements
+    animateElements();
 }
 
-// Design 1: Grid Animations
-function initGridAnimations() {
-    const nodes = document.querySelectorAll('.grid-node');
-    const streams = document.querySelectorAll('.data-stream');
+function switchDesign(design) {
+    // Add transition effect
+    document.body.style.opacity = '0.7';
+    document.body.style.transition = 'opacity 0.3s ease';
     
-    nodes.forEach((node, index) => {
-        node.style.animationDelay = `${index * 0.3}s`;
-        node.classList.add('animate-in');
-    });
-    
-    streams.forEach((stream, index) => {
-        stream.style.animationDelay = `${index * 0.5}s`;
-        stream.classList.add('animate-in');
-    });
-}
-
-// Design 2: Dashboard Animations
-function initDashboardAnimations() {
-    const bars = document.querySelectorAll('.chart-bar');
-    const metrics = document.querySelectorAll('.metric');
-    
-    bars.forEach((bar, index) => {
-        bar.style.animationDelay = `${index * 0.2}s`;
-        bar.classList.add('animate-in');
-    });
-    
-    metrics.forEach((metric, index) => {
-        metric.style.animationDelay = `${index * 0.3}s`;
-        metric.classList.add('animate-in');
-    });
-}
-
-// Design 3: Cyber Animations
-function initCyberAnimations() {
-    // Create particle system
-    createParticles();
-    
-    // Animate neural network
-    const neurons = document.querySelectorAll('.neuron');
-    const synapses = document.querySelectorAll('.synapse');
-    
-    neurons.forEach((neuron, index) => {
-        neuron.style.setProperty('--i', index);
-        neuron.classList.add('animate-in');
-    });
-    
-    synapses.forEach((synapse, index) => {
-        synapse.style.animationDelay = `${index * 0.5}s`;
-        synapse.classList.add('animate-in');
-    });
-}
-
-// 3D Cyber Visualization
-function initCyberVisualization() {
-    const canvas = document.getElementById('cyberCanvas');
-    if (!canvas || !THREE) return;
-    
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-        canvas: canvas,
-        alpha: true,
-        antialias: true 
-    });
-    
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    renderer.setClearColor(0x000000, 0);
-    
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x00ffff, 0.3);
-    scene.add(ambientLight);
-    
-    const pointLight = new THREE.PointLight(0xff00ff, 0.5);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-    
-    // Create data nodes
-    const nodes = [];
-    const nodeCount = 8;
-    
-    for (let i = 0; i < nodeCount; i++) {
-        const geometry = new THREE.SphereGeometry(0.3, 16, 16);
-        const material = new THREE.MeshPhongMaterial({ 
-            color: i % 2 === 0 ? 0x00ffff : 0xff00ff,
-            emissive: i % 2 === 0 ? 0x00ffff : 0xff00ff,
-            emissiveIntensity: 0.2,
-            shininess: 100
-        });
-        
-        const node = new THREE.Mesh(geometry, material);
-        
-        // Position in a sphere
-        const radius = 3;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-        
-        node.position.x = radius * Math.sin(phi) * Math.cos(theta);
-        node.position.y = radius * Math.sin(phi) * Math.sin(theta);
-        node.position.z = radius * Math.cos(phi);
-        
-        scene.add(node);
-        nodes.push(node);
-    }
-    
-    // Create connections
-    const connections = [];
-    for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-            if (Math.random() > 0.6) {
-                const geometry = new THREE.BufferGeometry().setFromPoints([
-                    nodes[i].position,
-                    nodes[j].position
-                ]);
-                
-                const material = new THREE.LineBasicMaterial({ 
-                    color: 0x00ffff,
-                    transparent: true,
-                    opacity: 0.3
-                });
-                
-                const connection = new THREE.Line(geometry, material);
-                scene.add(connection);
-                connections.push({
-                    line: connection,
-                    start: nodes[i],
-                    end: nodes[j]
-                });
-            }
-        }
-    }
-    
-    camera.position.z = 5;
-    
-    // Controls
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    
-    // Animation
-    function animate() {
-        window.animationId = requestAnimationFrame(animate);
-        
-        // Rotate nodes
-        nodes.forEach((node, i) => {
-            node.rotation.x += 0.01;
-            node.rotation.y += 0.01;
-            
-            // Gentle floating motion
-            node.position.y += Math.sin(Date.now() * 0.001 + i) * 0.002;
-        });
-        
-        // Update connections
-        connections.forEach(conn => {
-            const positions = conn.line.geometry.attributes.position.array;
-            positions[0] = conn.start.position.x;
-            positions[1] = conn.start.position.y;
-            positions[2] = conn.start.position.z;
-            positions[3] = conn.end.position.x;
-            positions[4] = conn.end.position.y;
-            positions[5] = conn.end.position.z;
-            conn.line.geometry.attributes.position.needsUpdate = true;
-        });
-        
-        controls.update();
-        renderer.render(scene, camera);
-    }
-    
-    // Handle resize
-    window.addEventListener('resize', () => {
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    });
-    
-    // Start animation
-    animate();
-}
-
-// Particle System
-function createParticles() {
-    const particleLayer = document.querySelector('.particle-system');
-    if (!particleLayer) return;
-    
-    // Clear existing particles
-    particleLayer.innerHTML = '';
-    
-    const layers = ['layer-1', 'layer-2', 'layer-3'];
-    
-    layers.forEach((layerClass, layerIndex) => {
-        const layer = document.createElement('div');
-        layer.className = `particle-layer ${layerClass}`;
-        
-        const particleCount = 20 + layerIndex * 10;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'cyber-particle';
-            
-            const size = 1 + Math.random() * 3;
-            const duration = 5 + Math.random() * 10;
-            const delay = Math.random() * 5;
-            
-            particle.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                background: ${layerIndex === 0 ? '#00ffff' : layerIndex === 1 ? '#ff00ff' : '#ffff00'};
-                border-radius: 50%;
-                left: ${Math.random() * 100}%;
-                top: ${Math.random() * 100}%;
-                opacity: ${0.2 + Math.random() * 0.3};
-                animation: floatParticle ${duration}s linear ${delay}s infinite;
-                filter: blur(${size / 2}px);
-            `;
-            
-            layer.appendChild(particle);
-        }
-        
-        particleLayer.appendChild(layer);
-    });
-    
-    // Add CSS for particle animation
-    if (!document.querySelector('#particle-animation')) {
-        const style = document.createElement('style');
-        style.id = 'particle-animation';
-        style.textContent = `
-            @keyframes floatParticle {
-                0% {
-                    transform: translate(0, 0) scale(1);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 0.5;
-                }
-                90% {
-                    opacity: 0.5;
-                }
-                100% {
-                    transform: translate(${Math.random() * 200 - 100}px, -100vh) scale(0);
-                    opacity: 0;
-                }
-            }
-            
-            .animate-in {
-                animation: fadeInUp 0.6s ease forwards;
-                opacity: 0;
-            }
-            
-            @keyframes fadeInUp {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
-
-// Animate Statistics
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-number');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const stat = entry.target;
-                const target = parseFloat(stat.textContent);
-                let current = 0;
-                const increment = target / 50;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    stat.textContent = Math.round(current) + (stat.textContent.includes('%') ? '%' : '');
-                }, 30);
-                observer.unobserve(stat);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    stats.forEach(stat => observer.observe(stat));
-}
-
-// Animate Service Cards
-function animateServiceCards() {
-    const cards = document.querySelectorAll('.service-card, .elegant-service, .cyber-service-card');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('animate-in');
-                }, index * 100);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        observer.observe(card);
-    });
-}
-
-// Animate Tech Items
-function animateTechItems() {
-    const items = document.querySelectorAll('.tech-item');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('animate-in');
-                }, index * 50);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    items.forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px)';
-        observer.observe(item);
-    });
-}
-
-// Parallax Effects
-function initParallax() {
-    const parallaxElements = document.querySelectorAll('.grid-visualization, .elegant-background, .particle-system');
-    
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        
-        parallaxElements.forEach(element => {
-            const speed = element.classList.contains('grid-visualization') ? 0.5 :
-                         element.classList.contains('elegant-background') ? 0.3 : 0.7;
-            
-            element.style.transform = `translateY(${scrollY * speed}px)`;
-        });
-    });
-}
-
-// Initialize on load
-window.addEventListener('load', () => {
-    // Trigger initial animations
     setTimeout(() => {
-        document.querySelectorAll('.animate-initial').forEach(el => {
-            el.classList.add('animate-in');
-        });
-    }, 500);
+        initializeDesign(design);
+        document.body.style.opacity = '1';
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Log design change
+        console.log(`Switched to Design ${design}`);
+    }, 300);
+}
+
+function initGridDesign() {
+    // Add grid animation to Design 1
+    const gridSquares = document.querySelectorAll('.grid-square');
+    gridSquares.forEach((square, index) => {
+        square.style.animationDelay = `${index * 0.1}s`;
+        square.classList.add('animate-grid');
+    });
+}
+
+function initElegantDesign() {
+    // Add elegant animations to Design 2
+    const stats = document.querySelectorAll('.hero-design-2 .stat-number');
+    stats.forEach(stat => {
+        const value = parseInt(stat.textContent);
+        if (!isNaN(value)) {
+            animateCounter(stat, value);
+        }
+    });
+}
+
+function initCyberDesign() {
+    // Add cyber animations to Design 3
+    const cyberElements = document.querySelectorAll('.cyber-service, .cyber-tag');
+    cyberElements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.2}s`;
+        element.classList.add('cyber-pulse');
+    });
+}
+
+function animateElements() {
+    // Animate all service cards
+    const serviceCards = document.querySelectorAll('.service-card, .elegant-service, .cyber-service');
+    serviceCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 100 + (index * 100));
+    });
+    
+    // Animate hero images
+    const heroImages = document.querySelectorAll('.arch-image, .dashboard-image, .cyber-image');
+    heroImages.forEach(image => {
+        image.style.opacity = '0';
+        image.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+            image.style.transition = 'all 0.8s ease';
+            image.style.opacity = '1';
+            image.style.transform = 'scale(1)';
+        }, 300);
+    });
+}
+
+function addAnimationEffects() {
+    // Add CSS for animations
+    const style = document.createElement('style');
+    style.textContent = `
+        .animate-grid {
+            animation: gridPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes gridPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .cyber-pulse {
+            animation: cyberGlow 3s infinite alternate;
+        }
+        
+        @keyframes cyberGlow {
+            0% { box-shadow: 0 0 5px var(--design-3-primary); }
+            100% { box-shadow: 0 0 20px var(--design-3-primary); }
+        }
+        
+        .service-card:hover .arch-image,
+        .dashboard-preview:hover .dashboard-image,
+        .cyber-preview:hover .cyber-image {
+            transform: scale(1.05) !important;
+        }
+        
+        .tech-logo:hover,
+        .tool-logo:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        element.textContent = Math.round(current) + (element.textContent.includes('%') ? '%' : '');
+    }, 30);
+}
+
+// Add image loading optimization
+window.addEventListener('load', function() {
+    // Lazy load images
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+            });
+        }
+    });
+    
+    // Add loaded class styling
+    const loadedStyle = document.createElement('style');
+    loadedStyle.textContent = `
+        img.loaded {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    `;
+    document.head.appendChild(loadedStyle);
+});
+
+// Handle window resize
+let resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        // Re-initialize animations on resize
+        const currentDesign = document.body.className.split('-')[1];
+        initializeDesign(currentDesign);
+    }, 250);
 });
