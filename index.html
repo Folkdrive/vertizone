@@ -1,1931 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VertiZone | Data Engineering & Analytics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== RESET & BASE STYLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            /* Design 1: Gridlines Architecture - Professional Green/Blue */
-            --design-1-primary: #1b5e20;
-            --design-1-secondary: #0d47a1;
-            --design-1-accent: #4caf50;
-            --design-1-bg: #ffffff;
-            --design-1-surface: #f8fafc;
-            --design-1-text: #1e293b;
-            --design-1-border: #e2e8f0;
-            
-            /* Design 2: Elegant Analytics - Sophisticated Purple/Teal */
-            --design-2-primary: #7c3aed;
-            --design-2-secondary: #0d9488;
-            --design-2-accent: #8b5cf6;
-            --design-2-bg: #fdfcfd;
-            --design-2-surface: #f9fafb;
-            --design-2-text: #111827;
-            --design-2-border: #e5e7eb;
-            
-            /* Design 3: Cyber Future - Futuristic Cyan/Magenta */
-            --design-3-primary: #00ffff;
-            --design-3-secondary: #ff00ff;
-            --design-3-accent: #00e5ff;
-            --design-3-bg: #0a0a0f;
-            --design-3-surface: #12121a;
-            --design-3-text: #ffffff;
-            --design-3-border: #222233;
-            
-            /* Active design variables */
-            --primary: var(--design-1-primary);
-            --secondary: var(--design-1-secondary);
-            --accent: var(--design-1-accent);
-            --bg: var(--design-1-bg);
-            --surface: var(--design-1-surface);
-            --text: var(--design-1-text);
-            --border: var(--design-1-border);
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: all 0.5s ease;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* ===== DESIGN SELECTOR ===== */
-        .design-selector {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 12px 20px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .selector-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .selector-container h2 {
-            font-size: 14px;
-            color: #374151;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .design-buttons {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .design-btn {
-            padding: 10px 18px;
-            background: #f3f4f6;
-            border: 2px solid #d1d5db;
-            border-radius: 10px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            min-width: 110px;
-        }
-        
-        .design-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .design-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-        
-        .design-btn.active .design-name {
-            color: white;
-        }
-        
-        .design-number {
-            font-size: 16px;
-            font-weight: 700;
-        }
-        
-        .design-name {
-            font-size: 12px;
-            color: #6b7280;
-            font-weight: 500;
-        }
-        
-        /* ===== DESIGN CONTAINER COMMON ===== */
-        .design-container {
-            display: none;
-            min-height: 100vh;
-            padding-bottom: 100px;
-        }
-        
-        body.design-1 .design-1-container,
-        body.design-2 .design-2-container,
-        body.design-3 .design-3-container {
-            display: block;
-            animation: fadeIn 0.8s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* ===== DESIGN 1: GRIDLINES ARCHITECTURE ===== */
-        .design-1-container {
-            --primary: var(--design-1-primary);
-            --secondary: var(--design-1-secondary);
-            --accent: var(--design-1-accent);
-            --bg: var(--design-1-bg);
-            --surface: var(--design-1-surface);
-            --text: var(--design-1-text);
-            --border: var(--design-1-border);
-            
-            background: var(--bg);
-            color: var(--text);
-        }
-        
-        /* Header */
-        .header-design-1 {
-            padding: 30px 0;
-            border-bottom: 2px solid var(--border);
-            background: var(--bg);
-        }
-        
-        .header-content-design-1 {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo-design-1 {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .grid-logo {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4px;
-            width: 48px;
-            height: 48px;
-        }
-        
-        .grid-square {
-            background: var(--primary);
-            border-radius: 4px;
-            transition: transform 0.3s ease;
-            animation: gridPulse 3s ease-in-out infinite;
-        }
-        
-        .grid-square:nth-child(1) { animation-delay: 0s; }
-        .grid-square:nth-child(2) { animation-delay: 0.1s; }
-        .grid-square:nth-child(3) { animation-delay: 0.2s; }
-        .grid-square:nth-child(4) { animation-delay: 0.3s; }
-        
-        @keyframes gridPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        
-        .logo-text-design-1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-        }
-        
-        .design-indicator {
-            background: rgba(27, 94, 32, 0.1);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            border: 1px solid var(--border);
-        }
-        
-        /* Hero */
-        .hero-design-1 {
-            padding: 80px 0;
-        }
-        
-        .hero-grid-design-1 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero-badge-design-1 {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(27, 94, 32, 0.1);
-            color: var(--primary);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-        
-        .hero-title-design-1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-        
-        .hero-description-design-1 {
-            font-size: 18px;
-            color: #64748b;
-            margin-bottom: 30px;
-            line-height: 1.7;
-        }
-        
-        .hero-features-design-1 {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .feature-design-1 {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-        
-        .feature-design-1 i {
-            color: var(--primary);
-            font-size: 18px;
-        }
-        
-        .architecture-preview {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border);
-        }
-        
-        .arch-image {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .architecture-preview:hover .arch-image {
-            transform: scale(1.05);
-        }
-        
-        .image-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
-            padding: 15px;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: center;
-        }
-        
-        /* Services */
-        .services-design-1 {
-            padding: 80px 0;
-            background: var(--surface);
-        }
-        
-        .section-title-design-1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-        
-        .section-subtitle-design-1 {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 50px;
-            font-size: 18px;
-        }
-        
-        .services-grid-design-1 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .service-card-design-1 {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-        
-        .service-card-design-1:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-        }
-        
-        .service-visual-design-1 {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .service-visual-design-1 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .service-icon-design-1 {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-card-design-1 h4 {
-            font-size: 20px;
-            font-weight: 600;
-            padding: 25px 25px 10px;
-            color: var(--text);
-        }
-        
-        .service-card-design-1 p {
-            color: #64748b;
-            padding: 0 25px 25px;
-            line-height: 1.7;
-        }
-        
-        .tech-stack-design-1 {
-            padding: 0 25px 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .tech-logo {
-            height: 32px;
-            width: auto;
-            opacity: 0.9;
-            transition: transform 0.3s ease;
-        }
-        
-        .tech-logo:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Stats */
-        .stats-design-1 {
-            padding: 80px 0;
-        }
-        
-        .stats-grid-design-1 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .stat-card-design-1 {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card-design-1:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-        }
-        
-        .stat-number-design-1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        .stat-label-design-1 {
-            font-size: 16px;
-            color: #64748b;
-            font-weight: 500;
-        }
-        
-        /* Footer */
-        .footer-design-1 {
-            padding: 40px 0;
-            background: var(--surface);
-            border-top: 2px solid var(--border);
-            text-align: center;
-        }
-        
-        .footer-logo-design-1 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-logo-design-1 span {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .footer-tagline-design-1 {
-            color: #64748b;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        /* ===== DESIGN 2: ELEGANT ANALYTICS ===== */
-        .design-2-container {
-            --primary: var(--design-2-primary);
-            --secondary: var(--design-2-secondary);
-            --accent: var(--design-2-accent);
-            --bg: var(--design-2-bg);
-            --surface: var(--design-2-surface);
-            --text: var(--design-2-text);
-            --border: var(--design-2-border);
-            
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        /* Header */
-        .header-design-2 {
-            padding: 40px 0;
-            background: var(--bg);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-design-2::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-        }
-        
-        .logo-design-2 {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .elegant-logo {
-            width: 48px;
-            height: 48px;
-            position: relative;
-        }
-        
-        .elegant-circle {
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--primary);
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: circleRotate 20s linear infinite;
-        }
-        
-        @keyframes circleRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .elegant-line {
-            width: 32px;
-            height: 3px;
-            background: var(--secondary);
-            position: absolute;
-            bottom: 12px;
-            right: 0;
-            transform: rotate(45deg);
-        }
-        
-        .logo-text-design-2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 32px;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-        }
-        
-        /* Hero */
-        .hero-design-2 {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--bg) 0%, #faf5ff 100%);
-        }
-        
-        .hero-elegant-design-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero-badge-design-2 {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-        
-        .hero-title-design-2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 52px;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            color: var(--text);
-        }
-        
-        .hero-description-design-2 {
-            font-size: 18px;
-            color: #6b7280;
-            line-height: 1.8;
-            margin-bottom: 40px;
-        }
-        
-        .dashboard-preview {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-            border: 1px solid var(--border);
-            position: relative;
-        }
-        
-        .dashboard-preview::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(13, 148, 136, 0.1));
-            pointer-events: none;
-        }
-        
-        .dashboard-image {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        
-        .dashboard-preview:hover .dashboard-image {
-            transform: scale(1.05);
-        }
-        
-        /* Services */
-        .services-design-2 {
-            padding: 100px 0;
-            background: var(--surface);
-        }
-        
-        .section-title-design-2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 42px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-        
-        .section-subtitle-design-2 {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 60px;
-            font-size: 18px;
-        }
-        
-        .services-elegant-design-2 {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .elegant-service-design-2 {
-            display: flex;
-            gap: 40px;
-            background: var(--bg);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-        }
-        
-        .elegant-service-design-2:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-        }
-        
-        .service-number-design-2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 64px;
-            font-weight: 700;
-            color: rgba(124, 58, 237, 0.1);
-            min-width: 80px;
-        }
-        
-        .service-content-design-2 {
-            flex: 1;
-        }
-        
-        .service-image-design-2 {
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            height: 200px;
-        }
-        
-        .service-image-design-2 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .elegant-service-design-2 h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-        
-        .elegant-service-design-2 p {
-            color: #6b7280;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-        
-        .tool-stack-design-2 {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .tool-logo {
-            height: 30px;
-            width: auto;
-            opacity: 0.9;
-            transition: transform 0.3s ease;
-        }
-        
-        .tool-logo:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Showcase */
-        .showcase-design-2 {
-            padding: 80px 0;
-            background: var(--bg);
-        }
-        
-        .showcase-grid-design-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-        
-        .showcase-item-design-2 {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            height: 300px;
-            transition: transform 0.5s ease;
-        }
-        
-        .showcase-item-design-2:hover {
-            transform: translateY(-10px);
-        }
-        
-        .showcase-item-design-2 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .showcase-label-design-2 {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: 500;
-            font-size: 16px;
-        }
-        
-        /* Footer */
-        .footer-design-2 {
-            padding: 50px 0;
-            background: var(--bg);
-            text-align: center;
-        }
-        
-        .footer-logo-design-2 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-logo-design-2 span {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: var(--primary);
-        }
-        
-        .footer-tagline-design-2 {
-            color: #6b7280;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        /* ===== DESIGN 3: CYBER FUTURE ===== */
-        .design-3-container {
-            --primary: var(--design-3-primary);
-            --secondary: var(--design-3-secondary);
-            --accent: var(--design-3-accent);
-            --bg: var(--design-3-bg);
-            --surface: var(--design-3-surface);
-            --text: var(--design-3-text);
-            --border: var(--design-3-border);
-            
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        /* Header */
-        .header-design-3 {
-            background: rgba(10, 10, 15, 0.9);
-            padding: 30px 0;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-design-3::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
-        }
-        
-        .logo-design-3 {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .cyber-logo {
-            width: 48px;
-            height: 48px;
-            position: relative;
-        }
-        
-        .cyber-core {
-            width: 16px;
-            height: 16px;
-            background: var(--primary);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px var(--primary);
-            animation: cyberPulse 2s infinite;
-        }
-        
-        @keyframes cyberPulse {
-            0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
-        }
-        
-        .cyber-ring {
-            width: 48px;
-            height: 48px;
-            border: 2px solid var(--secondary);
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: cyberRotate 8s linear infinite;
-        }
-        
-        @keyframes cyberRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .logo-text-design-3 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 32px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-        
-        /* Hero */
-        .hero-design-3 {
-            padding: 100px 0;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-cyber-design-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero-badge-design-3 {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            text-shadow: 0 0 10px var(--primary);
-            margin-bottom: 30px;
-        }
-        
-        .hero-title-design-3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 52px;
-            font-weight: 700;
-            text-shadow: 0 0 20px var(--primary);
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-        
-        .hero-description-design-3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            color: #a0a0a0;
-            margin-bottom: 40px;
-            line-height: 1.7;
-        }
-        
-        .cyber-features-design-3 {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .cyber-feature-design-3 {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .cyber-preview {
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
-            position: relative;
-        }
-        
-        .cyber-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            pointer-events: none;
-        }
-        
-        .cyber-image {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            filter: brightness(1.1) contrast(1.2);
-            transition: transform 0.5s ease;
-        }
-        
-        .cyber-preview:hover .cyber-image {
-            transform: scale(1.05);
-        }
-        
-        /* Services */
-        .services-design-3 {
-            padding: 80px 0;
-            background: var(--surface);
-        }
-        
-        .section-title-design-3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px var(--primary);
-        }
-        
-        .section-subtitle-design-3 {
-            text-align: center;
-            color: #a0a0a0;
-            margin-bottom: 50px;
-            font-size: 18px;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .services-cyber-design-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .cyber-service-design-3 {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cyber-service-design-3:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
-        }
-        
-        .cyber-service-design-3::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        
-        .cyber-service-design-3:hover::before {
-            left: 100%;
-        }
-        
-        .service-header-design-3 {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .cyber-icon-design-3 {
-            width: 56px;
-            height: 56px;
-            background: rgba(0, 255, 255, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-        }
-        
-        .cyber-service-design-3 h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .service-image-design-3 {
-            height: 200px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 25px;
-        }
-        
-        .service-image-design-3 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .cyber-service-design-3 p {
-            font-family: 'Inter', sans-serif;
-            color: #a0a0a0;
-            line-height: 1.7;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-        
-        .tech-tags-design-3 {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .cyber-tag {
-            background: rgba(0, 255, 255, 0.1);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        /* Future Tech */
-        .future-tech-design-3 {
-            padding: 80px 0;
-            background: var(--bg);
-        }
-        
-        .future-content-design-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .future-image-design-3 {
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
-            position: relative;
-        }
-        
-        .future-image-design-3 img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-        
-        .future-text-design-3 h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text);
-            text-shadow: 0 0 10px var(--primary);
-        }
-        
-        .future-text-design-3 p {
-            font-family: 'Inter', sans-serif;
-            color: #a0a0a0;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            font-size: 18px;
-        }
-        
-        .future-stats-design-3 {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        
-        .cyber-stat-design-3 {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .stat-value-design-3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
-        }
-        
-        .stat-label-design-3 {
-            font-family: 'Inter', sans-serif;
-            color: #a0a0a0;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .stat-bar-design-3 {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            width: 100%;
-        }
-        
-        .bar-fill-design-3 {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 80%;
-            animation: cyberBar 3s infinite alternate;
-        }
-        
-        @keyframes cyberBar {
-            0% { width: 75%; }
-            100% { width: 85%; }
-        }
-        
-        /* Footer */
-        .footer-design-3 {
-            padding: 40px 0;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-        
-        .footer-logo-design-3 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-logo-design-3 span {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .footer-tagline-design-3 {
-            color: #a0a0a0;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 1024px) {
-            .hero-grid-design-1,
-            .hero-elegant-design-2,
-            .hero-cyber-design-3,
-            .future-content-design-3 {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-            
-            .services-grid-design-1,
-            .services-cyber-design-3 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .hero-title-design-1,
-            .hero-title-design-2,
-            .hero-title-design-3 {
-                font-size: 42px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .design-buttons {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-            
-            .design-btn {
-                width: 100%;
-                max-width: 250px;
-            }
-            
-            .services-grid-design-1,
-            .services-cyber-design-3,
-            .showcase-grid-design-2,
-            .stats-grid-design-1 {
-                grid-template-columns: 1fr;
-            }
-            
-            .elegant-service-design-2 {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .service-number-design-2 {
-                min-width: auto;
-                text-align: center;
-                font-size: 48px;
-            }
-            
-            .hero-title-design-1,
-            .hero-title-design-2,
-            .hero-title-design-3 {
-                font-size: 36px;
-            }
-            
-            .section-title-design-1,
-            .section-title-design-2,
-            .section-title-design-3 {
-                font-size: 32px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .hero-design-1,
-            .hero-design-2,
-            .hero-design-3 {
-                padding: 60px 0;
-            }
-            
-            .services-design-1,
-            .services-design-2,
-            .services-design-3 {
-                padding: 60px 0;
-            }
-            
-            .logo-text-design-1,
-            .logo-text-design-2,
-            .logo-text-design-3 {
-                font-size: 24px;
-            }
-            
-            .design-indicator {
-                font-size: 11px;
-                padding: 6px 12px;
-            }
-            
-            .design-selector {
-                width: 90%;
-                padding: 10px 15px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Vertizone | Data Engineering & Business Intelligence Solutions</title>
+
+  <meta name="description" content="Vertizone delivers enterprise-grade data engineering, analytics, and business intelligence solutions that help organizations make confident, data-driven decisions." />
+
+  <meta name="keywords" content="Data Engineering, Business Intelligence, Analytics Solutions, BI Dashboards, Data Platforms, ETL" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="design-1">
-    <!-- Design Selection -->
-    <div class="design-selector">
-        <div class="selector-container">
-            <h2>Select Design Concept</h2>
-            <div class="design-buttons">
-                <button class="design-btn active" data-design="1">
-                    <span class="design-number">Design 1</span>
-                    <span class="design-name">Gridlines Architecture</span>
-                </button>
-                <button class="design-btn" data-design="2">
-                    <span class="design-number">Design 2</span>
-                    <span class="design-name">Elegant Analytics</span>
-                </button>
-                <button class="design-btn" data-design="3">
-                    <span class="design-number">Design 3</span>
-                    <span class="design-name">Cyber Future</span>
-                </button>
-            </div>
+
+<body>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/9845212286" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-container">
+      <img src="asset/logo.png" alt="Vertizone - Data & Analytics Solutions" class="logo">
+      
+      <!-- Navigation Menu -->
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="#" class="nav-link">Services</a></li>
+          <li><a href="#" class="nav-link">Solutions</a></li>
+          <li><a href="#" class="nav-link">Industries</a></li>
+          <li><a href="#" class="nav-link">Insights</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <a href="tel:+919845212286" class="phone-link">
+          <i class="fas fa-phone"></i>
+          <span>+91 98452 12286</span>
+        </a>
+        <a href="https://wa.me/9845212286" class="btn-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="#" class="mobile-nav-link active">Home</a></li>
+        <li><a href="#" class="mobile-nav-link">About</a></li>
+        <li><a href="#" class="mobile-nav-link">Services</a></li>
+        <li><a href="#" class="mobile-nav-link">Solutions</a></li>
+        <li><a href="#" class="mobile-nav-link">Industries</a></li>
+        <li><a href="#" class="mobile-nav-link">Insights</a></li>
+        <li><a href="#" class="mobile-nav-link">Contact</a></li>
+        <li><a href="tel:+919845212286" class="mobile-nav-link phone">
+          <i class="fas fa-phone"></i> +91 98452 12286
+        </a></li>
+        <li><a href="https://wa.me/9845212286" class="mobile-nav-link whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="asset/3130182-uhd_3840_2160_30fps.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1>Transforming Data Into Strategic Business Intelligence</h1>
+      <p>
+        Vertizone designs and delivers modern data platforms, advanced analytics,
+        and intuitive BI dashboards that empower organizations to make faster,
+        smarter, and more confident decisions.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Talk to a Data Expert</a>
+        <a href="#" class="btn-secondary">Explore Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust">
+    <div class="trust-container">
+      <div class="trust-item">
+        <i class="fas fa-shield-alt"></i>
+        <span>Enterprise Data Engineering</span>
+      </div>
+      <div class="trust-item">
+        <i class="fas fa-chart-line"></i>
+        <span>Scalable Analytics Solutions</span>
+      </div>
+      <div class="trust-item">
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Modern BI & Dashboards</span>
+      </div>
+      <div class="trust-item">
+        <i class="fas fa-handshake"></i>
+        <span>Trusted Long-Term Partner</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="section-header">
+      <h2>Our Core Capabilities</h2>
+      <p class="section-subtitle">Comprehensive data solutions that drive business growth and innovation</p>
+    </div>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-code-branch"></i>
         </div>
+        <h3>Data Engineering & Integration</h3>
+        <p>
+          We build reliable, high-performance data pipelines that integrate data
+          across systems, ensuring accuracy, consistency, and availability.
+        </p>
+        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-cloud"></i>
+        </div>
+        <h3>Data Warehousing & Data Lakes</h3>
+        <p>
+          Design and implementation of scalable, cloud-ready data architectures
+          that grow seamlessly with your business.
+        </p>
+        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <h3>Business Intelligence & Dashboards</h3>
+        <p>
+          Interactive dashboards and reports that provide real-time visibility
+          into KPIs, trends, and operational performance.
+        </p>
+        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h3>Advanced Analytics & OLAP</h3>
+        <p>
+          Multidimensional analysis and advanced analytics that uncover patterns,
+          insights, and opportunities hidden within your data.
+        </p>
+        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
+  </section>
 
-    <!-- ===== DESIGN 1: GRIDLINES ARCHITECTURE ===== -->
-    <div class="design-container design-1-container">
-        <header class="header-design-1">
-            <div class="container">
-                <div class="header-content-design-1">
-                    <div class="logo-design-1">
-                        <div class="grid-logo">
-                            <div class="grid-square"></div>
-                            <div class="grid-square"></div>
-                            <div class="grid-square"></div>
-                            <div class="grid-square"></div>
-                        </div>
-                        <h1 class="logo-text-design-1">VERTIZONE</h1>
-                        <div class="design-indicator">Gridlines Architecture</div>
-                    </div>
-                </div>
-            </div>
-        </header>
+  <!-- VISUAL BREAK -->
+  <section class="visual-break">
+    <video autoplay muted loop playsinline>
+      <source src="asset/14471989_3840_2160_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="visual-text">Clarity. Intelligence. Impact.</div>
+  </section>
 
-        <section class="hero-design-1">
-            <div class="container">
-                <div class="hero-grid-design-1">
-                    <div class="hero-content">
-                        <div class="hero-badge-design-1">
-                            <i class="fas fa-network-wired"></i>
-                            <span>ENTERPRISE DATA ARCHITECTURE</span>
-                        </div>
-                        
-                        <h2 class="hero-title-design-1">
-                            Structured Data Pipeline Engineering
-                        </h2>
-                        
-                        <p class="hero-description-design-1">
-                            Building robust, scalable data infrastructure with precision architecture and modern engineering practices.
-                        </p>
-                        
-                        <div class="hero-features-design-1">
-                            <div class="feature-design-1">
-                                <i class="fas fa-check-circle"></i>
-                                <span>AWS Cloud Architecture</span>
-                            </div>
-                            <div class="feature-design-1">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Snowflake Integration</span>
-                            </div>
-                            <div class="feature-design-1">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Real-time ETL Processing</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-visual">
-                        <div class="architecture-preview">
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Data Pipeline Architecture" class="arch-image">
-                            <div class="image-label">Data Pipeline Architecture</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- WHY -->
+  <section class="why">
+    <div class="why-container">
+      <div class="why-content">
+        <div class="why-text">
+          <h2>Why Organizations Choose Vertizone</h2>
+          <p class="why-subtitle">We combine deep technical expertise with business acumen to deliver solutions that drive measurable value and competitive advantage.</p>
+          
+          <ul class="why-list">
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>Purpose-built data solutions</h4>
+                <p>Aligned to your specific business goals and outcomes, not generic templates.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>Scalable and future-ready architecture</h4>
+                <p>Designed to grow with your business and adapt to emerging technologies.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>Strong focus on measurable outcomes</h4>
+                <p>Trackable ROI and tangible business impact with clear success metrics.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>Transparent, collaborative engagement model</h4>
+                <p>Partnership approach with regular communication and progress updates.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>Industry-specific expertise</h4>
+                <p>Deep understanding of data challenges across different sectors and domains.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>End-to-end implementation support</h4>
+                <p>From strategy to deployment and ongoing optimization.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-        <section class="services-design-1">
-            <div class="container">
-                <h3 class="section-title-design-1">Data Engineering Services</h3>
-                <p class="section-subtitle-design-1">Structured solutions for modern data challenges</p>
-                
-                <div class="services-grid-design-1">
-                    <div class="service-card-design-1">
-                        <div class="service-visual-design-1">
-                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="Cloud Architecture">
-                            <div class="service-icon-design-1">
-                                <i class="fas fa-cloud"></i>
-                            </div>
-                        </div>
-                        <h4>Cloud Data Platforms</h4>
-                        <p>AWS, Azure, GCP data solutions with Snowflake and Redshift integration for scalable enterprise data management.</p>
-                        <div class="tech-stack-design-1">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="tech-logo">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/snowflake/snowflake-original.svg" alt="Snowflake" class="tech-logo">
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-design-1">
-                        <div class="service-visual-design-1">
-                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="ETL Process">
-                            <div class="service-icon-design-1">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                        </div>
-                        <h4>Real-time ETL</h4>
-                        <p>Streaming data pipelines with Kafka, Kinesis, and Spark processing for immediate data availability.</p>
-                        <div class="tech-stack-design-1">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg" alt="Apache Kafka" class="tech-logo">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-logo">
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-design-1">
-                        <div class="service-visual-design-1">
-                            <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1136&q=80" alt="Database Schema">
-                            <div class="service-icon-design-1">
-                                <i class="fas fa-database"></i>
-                            </div>
-                        </div>
-                        <h4>Data Warehousing</h4>
-                        <p>Optimized data warehouses and lakes for enterprise analytics with advanced query performance.</p>
-                        <div class="tech-stack-design-1">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" class="tech-logo">
-                            <span class="tech-tag">SQL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="stats-design-1">
-            <div class="container">
-                <div class="stats-grid-design-1">
-                    <div class="stat-card-design-1">
-                        <div class="stat-number-design-1">PB</div>
-                        <div class="stat-label-design-1">Data Processed Daily</div>
-                    </div>
-                    <div class="stat-card-design-1">
-                        <div class="stat-number-design-1">99.9%</div>
-                        <div class="stat-label-design-1">Uptime Guarantee</div>
-                    </div>
-                    <div class="stat-card-design-1">
-                        <div class="stat-number-design-1">50ms</div>
-                        <div class="stat-label-design-1">Query Latency</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer-design-1">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-logo-design-1">
-                        <div class="grid-logo">
-                            <div class="grid-square"></div>
-                            <div class="grid-square"></div>
-                            <div class="grid-square"></div>
-                            <div class="grid-square"></div>
-                        </div>
-                        <span>VERTIZONE</span>
-                    </div>
-                    <p class="footer-tagline-design-1">Precision Data Engineering & Architecture</p>
-                </div>
-            </div>
-        </footer>
+        <div class="why-image">
+          <img src="asset/pexels-googledeepmind-25626428.jpg" alt="Advanced Analytics and AI Visualization">
+          <div class="image-overlay">
+            <h3>Proven Results</h3>
+            <p>Join 200+ enterprises that trust Vertizone for their data transformation journey.</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- ===== DESIGN 2: ELEGANT ANALYTICS ===== -->
-    <div class="design-container design-2-container">
-        <header class="header-design-2">
-            <div class="container">
-                <div class="header-content-design-1">
-                    <div class="logo-design-2">
-                        <div class="elegant-logo">
-                            <div class="elegant-circle"></div>
-                            <div class="elegant-line"></div>
-                        </div>
-                        <h1 class="logo-text-design-2">VertiZone</h1>
-                        <div class="design-indicator">Elegant Analytics</div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <section class="hero-design-2">
-            <div class="container">
-                <div class="hero-elegant-design-2">
-                    <div class="hero-content">
-                        <div class="hero-badge-design-2">
-                            <i class="fas fa-chart-line"></i>
-                            <span>BUSINESS INTELLIGENCE EXCELLENCE</span>
-                        </div>
-                        
-                        <h2 class="hero-title-design-2">
-                            Transform Data Into Business Advantage
-                        </h2>
-                        
-                        <p class="hero-description-design-2">
-                            Premium analytics and BI solutions that deliver actionable insights through elegant dashboards and sophisticated reporting.
-                        </p>
-                        
-                        <div class="hero-features-design-1">
-                            <div class="feature-design-1">
-                                <i class="fas fa-chart-pie"></i>
-                                <span>Interactive Dashboards</span>
-                            </div>
-                            <div class="feature-design-1">
-                                <i class="fas fa-brain"></i>
-                                <span>Predictive Analytics</span>
-                            </div>
-                            <div class="feature-design-1">
-                                <i class="fas fa-bullseye"></i>
-                                <span>Real-time Insights</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-visual">
-                        <div class="dashboard-preview">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Executive Dashboard" class="dashboard-image">
-                            <div class="image-label">Executive Dashboard Preview</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="services-design-2">
-            <div class="container">
-                <h3 class="section-title-design-2">Analytics Solutions</h3>
-                <p class="section-subtitle-design-2">Sophisticated data visualization and business intelligence</p>
-                
-                <div class="services-elegant-design-2">
-                    <div class="elegant-service-design-2">
-                        <div class="service-number-design-2">01</div>
-                        <div class="service-content-design-2">
-                            <div class="service-image-design-2">
-                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Data Visualization">
-                            </div>
-                            <h4>Interactive Dashboards</h4>
-                            <p>Real-time visualization with Power BI, Tableau, and custom analytics platforms for executive decision-making.</p>
-                            <div class="tool-stack-design-2">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/powerbi/powerbi-original.svg" alt="Power BI" class="tool-logo">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tableau/tableau-original.svg" alt="Tableau" class="tool-logo">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="elegant-service-design-2">
-                        <div class="service-number-design-2">02</div>
-                        <div class="service-content-design-2">
-                            <div class="service-image-design-2">
-                                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Business Intelligence">
-                            </div>
-                            <h4>Advanced Analytics</h4>
-                            <p>Predictive modeling, machine learning insights, and statistical analysis for forward-looking business strategies.</p>
-                            <div class="tool-stack-design-2">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tool-logo">
-                                <span class="tool-tag">ML</span>
-                                <span class="tool-tag">AI</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="showcase-design-2">
-            <div class="container">
-                <div class="showcase-grid-design-2">
-                    <div class="showcase-item-design-2">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Financial Dashboard">
-                        <div class="showcase-label-design-2">Financial Analytics Dashboard</div>
-                    </div>
-                    <div class="showcase-item-design-2">
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Analytics Interface">
-                        <div class="showcase-label-design-2">Analytics Interface</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer-design-2">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-logo-design-2">
-                        <div class="elegant-logo">
-                            <div class="elegant-circle"></div>
-                            <div class="elegant-line"></div>
-                        </div>
-                        <span>VertiZone</span>
-                    </div>
-                    <p class="footer-tagline-design-2">Elegant Analytics & Business Intelligence</p>
-                </div>
-            </div>
-        </footer>
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-container">
+      <h2>Ready to Unlock the Full Potential of Your Data?</h2>
+      <p class="cta-subtitle">Schedule a free consultation with our data experts to explore how Vertizone can transform your data into strategic assets.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-primary">Request a Free Consultation</a>
+        <a href="https://wa.me/9845212286" class="btn-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
     </div>
+  </section>
 
-    <!-- ===== DESIGN 3: CYBER FUTURE ===== -->
-    <div class="design-container design-3-container">
-        <header class="header-design-3">
-            <div class="container">
-                <div class="header-content-design-1">
-                    <div class="logo-design-3">
-                        <div class="cyber-logo">
-                            <div class="cyber-core"></div>
-                            <div class="cyber-ring"></div>
-                        </div>
-                        <h1 class="logo-text-design-3">VERTIZONE</h1>
-                        <div class="design-indicator">Cyber Future</div>
-                    </div>
-                </div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="asset/logo.png" alt="Vertizone" class="footer-logo">
+          <p class="footer-description">
+            Transforming data into strategic business intelligence. 
+            Enterprise-grade data engineering, analytics, and BI solutions.
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/9845212286" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#">Data Engineering</a></li>
+              <li><a href="#">Business Intelligence</a></li>
+              <li><a href="#">Advanced Analytics</a></li>
+              <li><a href="#">Cloud Data Platforms</a></li>
+              <li><a href="#">Data Migration</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Solutions</h4>
+            <ul>
+              <li><a href="#">Data Warehousing</a></li>
+              <li><a href="#">BI Dashboards</a></li>
+              <li><a href="#">Predictive Analytics</a></li>
+              <li><a href="#">Real-time Analytics</a></li>
+              <li><a href="#">Data Governance</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Blog & Insights</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column contact-details">
+            <h4>Contact Info</h4>
+            <div class="address">
+              <h5>Address</h5>
+              <p>
+                Co-Start Hub, #164, 1st Cross Rd,<br>
+                1st Main, RMV 2nd Stage,<br>
+                Sanjayanagar, Bengaluru,<br>
+                Karnataka 560 094.
+              </p>
             </div>
-        </header>
-
-        <section class="hero-design-3">
-            <div class="container">
-                <div class="hero-cyber-design-3">
-                    <div class="hero-content">
-                        <div class="hero-badge-design-3">
-                            <i class="fas fa-brain"></i>
-                            <span>NEXT-GEN DATA INTELLIGENCE</span>
-                        </div>
-                        
-                        <h2 class="hero-title-design-3">
-                            AI-Powered Data Futures
-                        </h2>
-                        
-                        <p class="hero-description-design-3">
-                            Transcend traditional analytics with neural networks, quantum-ready architecture, and immersive data experiences.
-                        </p>
-                        
-                        <div class="cyber-features-design-3">
-                            <div class="cyber-feature-design-3">
-                                <i class="fas fa-bolt"></i>
-                                <span>Real-time AI Processing</span>
-                            </div>
-                            <div class="cyber-feature-design-3">
-                                <i class="fas fa-robot"></i>
-                                <span>Machine Learning</span>
-                            </div>
-                            <div class="cyber-feature-design-3">
-                                <i class="fas fa-vr-cardboard"></i>
-                                <span>Immersive Analytics</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-visual">
-                        <div class="cyber-preview">
-                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="Neural Network" class="cyber-image">
-                            <div class="image-label">Neural Network Visualization</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="services-design-3">
-            <div class="container">
-                <h3 class="section-title-design-3">Future Data Technologies</h3>
-                <p class="section-subtitle-design-3">Pioneering the next evolution of data intelligence</p>
-                
-                <div class="services-cyber-design-3">
-                    <div class="cyber-service-design-3">
-                        <div class="service-header-design-3">
-                            <div class="cyber-icon-design-3">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <h4>REAL-TIME AI ANALYTICS</h4>
-                        </div>
-                        <div class="service-image-design-3">
-                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Quantum Computing">
-                        </div>
-                        <p>High-velocity data streams with sub-millisecond processing latency powered by AI algorithms.</p>
-                        <div class="tech-tags-design-3">
-                            <span class="cyber-tag">AI</span>
-                            <span class="cyber-tag">ML</span>
-                            <span class="cyber-tag">REAL-TIME</span>
-                        </div>
-                    </div>
-                    
-                    <div class="cyber-service-design-3">
-                        <div class="service-header-design-3">
-                            <div class="cyber-icon-design-3">
-                                <i class="fas fa-server"></i>
-                            </div>
-                            <h4>QUANTUM READY ARCHITECTURE</h4>
-                        </div>
-                        <div class="service-image-design-3">
-                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="Data Stream">
-                        </div>
-                        <p>Next-generation data processing with quantum computing architecture and distributed systems.</p>
-                        <div class="tech-tags-design-3">
-                            <span class="cyber-tag">QUANTUM</span>
-                            <span class="cyber-tag">CLOUD</span>
-                            <span class="cyber-tag">DISTRIBUTED</span>
-                        </div>
-                    </div>
-                    
-                    <div class="cyber-service-design-3">
-                        <div class="service-header-design-3">
-                            <div class="cyber-icon-design-3">
-                                <i class="fas fa-chart-network"></i>
-                            </div>
-                            <h4>IMMERSIVE ANALYTICS</h4>
-                        </div>
-                        <div class="service-image-design-3">
-                            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="AI Brain">
-                        </div>
-                        <p>VR/AR data visualization and holographic interfaces for immersive business intelligence experiences.</p>
-                        <div class="tech-tags-design-3">
-                            <span class="cyber-tag">VR</span>
-                            <span class="cyber-tag">AR</span>
-                            <span class="cyber-tag">3D</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="future-tech-design-3">
-            <div class="container">
-                <div class="future-content-design-3">
-                    <div class="future-image-design-3">
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Future Technology">
-                    </div>
-                    <div class="future-text-design-3">
-                        <h4>The Future of Data Intelligence</h4>
-                        <p>We're building tomorrow's data solutions today with cutting-edge technologies and innovative approaches to data processing.</p>
-                        <div class="future-stats-design-3">
-                            <div class="cyber-stat-design-3">
-                                <div class="stat-value-design-3">0.001s</div>
-                                <div class="stat-label-design-3">AI Response Time</div>
-                                <div class="stat-bar-design-3">
-                                    <div class="bar-fill-design-3"></div>
-                                </div>
-                            </div>
-                            <div class="cyber-stat-design-3">
-                                <div class="stat-value-design-3">99.99%</div>
-                                <div class="stat-label-design-3">Prediction Accuracy</div>
-                                <div class="stat-bar-design-3">
-                                    <div class="bar-fill-design-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer-design-3">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-logo-design-3">
-                        <div class="cyber-logo">
-                            <div class="cyber-core"></div>
-                            <div class="cyber-ring"></div>
-                        </div>
-                        <span>VERTIZONE</span>
-                    </div>
-                    <p class="footer-tagline-design-3">Next-Generation Data Intelligence</p>
-                </div>
-            </div>
-        </footer>
+            <ul class="contact-info">
+              <li>
+                <i class="fas fa-phone"></i>
+                <a href="tel:+919845212286">+91 98452 12286</a>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:mmahishi@vertizone.com">mmahishi@vertizone.com</a>
+              </li>
+              <li>
+                <i class="fas fa-clock"></i>
+                <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/9845212286" class="footer-whatsapp-btn" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+              <span>Message on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <p>© 2026 Vertizone. All Rights Reserved.</p>
+          <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+        <div class="footer-credit">
+          <p>
+            Designed and developed by
+            <a href="https://www.folkdrive.in" target="_blank" rel="noopener">Folkdrive India Pvt Ltd</a>
+          </p>
+        </div>
+      </div>
     </div>
+  </footer>
 
-    <script>
-        // Design Switching Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize with Design 1
-            initializeDesign('1');
-            
-            // Design selector buttons
-            const designButtons = document.querySelectorAll('.design-btn');
-            
-            designButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const design = this.getAttribute('data-design');
-                    switchDesign(design);
-                });
-            });
-            
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                if (e.key >= '1' && e.key <= '3') {
-                    switchDesign(e.key);
-                }
-            });
-            
-            // Add some animations
-            animateElements();
-        });
-        
-        function initializeDesign(design) {
-            // Set body class
-            document.body.className = `design-${design}`;
-            
-            // Update active button
-            document.querySelectorAll('.design-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-design') === design) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        function switchDesign(design) {
-            // Add transition effect
-            document.body.style.opacity = '0.7';
-            document.body.style.transition = 'opacity 0.3s ease';
-            
-            setTimeout(() => {
-                initializeDesign(design);
-                document.body.style.opacity = '1';
-                
-                // Log design change
-                console.log(`Switched to Design ${design}`);
-            }, 300);
-        }
-        
-        function animateElements() {
-            // Animate service cards on load
-            const serviceCards = document.querySelectorAll('.service-card-design-1, .elegant-service-design-2, .cyber-service-design-3');
-            serviceCards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 + (index * 100));
-            });
-        }
-        
-        // Handle window resize
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                // Adjust design selector position on mobile
-                if (window.innerWidth < 768) {
-                    document.querySelector('.design-selector').style.bottom = '10px';
-                } else {
-                    document.querySelector('.design-selector').style.bottom = '20px';
-                }
-            }, 250);
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
