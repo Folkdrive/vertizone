@@ -10,44 +10,44 @@
 
   <meta name="keywords" content="Data Engineering, Business Intelligence, Analytics Solutions, BI Dashboards, Data Platforms, ETL" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style-common.css" />
+<link rel="stylesheet" href="style-home.css" />
 </head>
 
 <body>
 
-  <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/9845212286" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+  <!-- Animated Background Gradient - Very subtle -->
+  <div class="bg-gradient-animation"></div>
 
   <!-- HEADER -->
   <header class="header">
     <div class="header-container">
-      <img src="asset/logo.png" alt="Vertizone - Data & Analytics Solutions" class="logo">
+      <div class="logo-container">
+        <img src="asset/logo.png" alt="Vertizone - Data & Analytics Solutions" class="logo">
+        <div class="logo-glow"></div>
+      </div>
       
-      <!-- Navigation Menu -->
+      <!-- Navigation Menu - No WhatsApp -->
       <nav class="main-nav">
-        <ul>
-          <li><a href="#" class="nav-link active">Home</a></li>
-          <li><a href="#" class="nav-link">About</a></li>
-          <li><a href="#" class="nav-link">Services</a></li>
-          <li><a href="#" class="nav-link">Solutions</a></li>
-          <li><a href="#" class="nav-link">Industries</a></li>
-          <li><a href="#" class="nav-link">Insights</a></li>
-          <li><a href="#" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
+  <ul>
+    <li><a href="index.html" class="nav-link active"><span>Home</span></a></li>
+    <li><a href="about.html" class="nav-link"><span>About</span></a></li>
+    <li><a href="services.html" class="nav-link"><span>Services</span></a></li>
+    <li><a href="portfolio.html" class="nav-link"><span>Industries</span></a></li>
+    <li><a href="contact.html" class="nav-link"><span>Contact</span></a></li>
+  </ul>
+</nav>
       
       <div class="header-actions">
-        <a href="tel:+919845212286" class="phone-link">
-          <i class="fas fa-phone"></i>
+        <a href="tel:+919845212286" class="phone-link pulse-phone">
+          <div class="phone-icon">
+            <i class="fas fa-phone"></i>
+            <div class="phone-ring"></div>
+          </div>
           <span>+91 98452 12286</span>
         </a>
-        <a href="https://wa.me/9845212286" class="btn-whatsapp" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-          <span>WhatsApp</span>
-        </a>
+        <!-- WhatsApp button removed from header -->
       </div>
       
       <!-- Mobile Menu Toggle -->
@@ -58,66 +58,137 @@
       </button>
     </div>
     
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation - No WhatsApp -->
     <nav class="mobile-nav">
-      <ul>
-        <li><a href="#" class="mobile-nav-link active">Home</a></li>
-        <li><a href="#" class="mobile-nav-link">About</a></li>
-        <li><a href="#" class="mobile-nav-link">Services</a></li>
-        <li><a href="#" class="mobile-nav-link">Solutions</a></li>
-        <li><a href="#" class="mobile-nav-link">Industries</a></li>
-        <li><a href="#" class="mobile-nav-link">Insights</a></li>
-        <li><a href="#" class="mobile-nav-link">Contact</a></li>
-        <li><a href="tel:+919845212286" class="mobile-nav-link phone">
-          <i class="fas fa-phone"></i> +91 98452 12286
-        </a></li>
-        <li><a href="https://wa.me/9845212286" class="mobile-nav-link whatsapp" target="_blank">
-          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-        </a></li>
-      </ul>
-    </nav>
+  <ul>
+    <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
+    <li><a href="about.html" class="mobile-nav-link">About</a></li>
+    <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+    <li><a href="portfolio.html" class="mobile-nav-link">Industries</a></li>
+    <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+    <li><a href="tel:+919845212286" class="mobile-nav-link phone">
+      <i class="fas fa-phone"></i> +91 98452 12286
+    </a></li>
+  </ul>
+</nav>
+
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="asset/3130182-uhd_3840_2160_30fps.mp4" type="video/mp4">
-    </video>
-
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-      <h1>Transforming Data Into Strategic Business Intelligence</h1>
-      <p>
-        Vertizone designs and delivers modern data platforms, advanced analytics,
-        and intuitive BI dashboards that empower organizations to make faster,
-        smarter, and more confident decisions.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#" class="btn-primary">Talk to a Data Expert</a>
-        <a href="#" class="btn-secondary">Explore Our Services</a>
+  <!-- Animated Robot -->
+  <div class="robot-container">
+    <div class="robot">
+      <div class="robot-body">
+        <div class="robot-face">
+          <div class="robot-eye left"></div>
+          <div class="robot-eye right"></div>
+          <div class="robot-mouth"></div>
+        </div>
+        <div class="robot-antenna">
+          <div class="antenna-base"></div>
+          <div class="antenna-light"></div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- HERO -->
+<section class="hero">
+  <div class="hero-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Video Container Fixed -->
+  <div class="hero-video-container">
+    <div class="video-wrapper">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="asset/3130182-uhd_3840_2160_30fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-text">Enterprise Data Intelligence</span>
+      <div class="badge-glow"></div>
+    </div>
+    
+    <h1>Transforming <span class="gradient-text">Data</span> Into Strategic <span class="gradient-text">Business Intelligence</span></h1>
+    <p>
+      Vertizone designs and delivers modern data platforms, advanced analytics,
+      and intuitive BI dashboards that empower organizations to make faster,
+      smarter, and more confident decisions.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary rainbow-hover">
+        <span>Talk to a Data Expert</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+      <a href="#" class="btn-secondary">
+        <span>Explore Our Services</span>
+        <i class="fas fa-chart-line"></i>
+      </a>
+    </div>
+    
+    <!-- Colorful Stats -->
+    <div class="hero-stats">
+      <div class="stat-item" style="--stat-color: #FF6B6B;">
+        <div class="stat-number" data-count="98">0</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+      <div class="stat-item" style="--stat-color: #4ECDC4;">
+        <div class="stat-number" data-count="150">0</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-item" style="--stat-color: #FFD166;">
+        <div class="stat-number" data-count="24">0</div>
+        <div class="stat-label">Response Time (hrs)</div>
+      </div>
+      <div class="stat-item" style="--stat-color: #A599E9;">
+        <div class="stat-number" data-count="50">0</div>
+        <div class="stat-label">Expert Team Members</div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- TRUST -->
   <section class="trust">
+    <div class="color-wave"></div>
     <div class="trust-container">
       <div class="trust-item">
-        <i class="fas fa-shield-alt"></i>
+        <div class="trust-icon" style="--icon-color: #FF6B6B;">
+          <i class="fas fa-shield-alt"></i>
+          <div class="icon-glow"></div>
+        </div>
         <span>Enterprise Data Engineering</span>
       </div>
       <div class="trust-item">
-        <i class="fas fa-chart-line"></i>
+        <div class="trust-icon" style="--icon-color: #4ECDC4;">
+          <i class="fas fa-chart-line"></i>
+          <div class="icon-glow"></div>
+        </div>
         <span>Scalable Analytics Solutions</span>
       </div>
       <div class="trust-item">
-        <i class="fas fa-tachometer-alt"></i>
+        <div class="trust-icon" style="--icon-color: #FFD166;">
+          <i class="fas fa-tachometer-alt"></i>
+          <div class="icon-glow"></div>
+        </div>
         <span>Modern BI & Dashboards</span>
       </div>
       <div class="trust-item">
-        <i class="fas fa-handshake"></i>
+        <div class="trust-icon" style="--icon-color: #A599E9;">
+          <i class="fas fa-handshake"></i>
+          <div class="icon-glow"></div>
+        </div>
         <span>Trusted Long-Term Partner</span>
       </div>
     </div>
@@ -126,67 +197,122 @@
   <!-- SERVICES -->
   <section class="services">
     <div class="section-header">
-      <h2>Our Core Capabilities</h2>
+      <div class="section-badge">Our Expertise</div>
+      <h2>Our <span class="gradient-text">Core Capabilities</span></h2>
       <p class="section-subtitle">Comprehensive data solutions that drive business growth and innovation</p>
     </div>
 
     <div class="service-grid">
-      <div class="service-card">
+      <div class="service-card" style="--card-color: #FF6B6B;">
         <div class="service-icon">
           <i class="fas fa-code-branch"></i>
+          <div class="icon-sparkle"></div>
         </div>
         <h3>Data Engineering & Integration</h3>
         <p>
           We build reliable, high-performance data pipelines that integrate data
           across systems, ensuring accuracy, consistency, and availability.
         </p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        <div class="tech-tags">
+          <span>ETL/ELT</span>
+          <span>Apache Spark</span>
+          <span>Airflow</span>
+        </div>
+        <a href="#" class="service-link">
+          <span>Learn More</span>
+          <div class="link-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </a>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" style="--card-color: #4ECDC4;">
         <div class="service-icon">
           <i class="fas fa-cloud"></i>
+          <div class="icon-sparkle"></div>
         </div>
         <h3>Data Warehousing & Data Lakes</h3>
         <p>
           Design and implementation of scalable, cloud-ready data architectures
           that grow seamlessly with your business.
         </p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        <div class="tech-tags">
+          <span>Snowflake</span>
+          <span>AWS Redshift</span>
+          <span>Databricks</span>
+        </div>
+        <a href="#" class="service-link">
+          <span>Learn More</span>
+          <div class="link-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </a>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" style="--card-color: #FFD166;">
         <div class="service-icon">
           <i class="fas fa-chart-bar"></i>
+          <div class="icon-sparkle"></div>
         </div>
         <h3>Business Intelligence & Dashboards</h3>
         <p>
           Interactive dashboards and reports that provide real-time visibility
           into KPIs, trends, and operational performance.
         </p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        <div class="tech-tags">
+          <span>Power BI</span>
+          <span>Tableau</span>
+          <span>Looker</span>
+        </div>
+        <a href="#" class="service-link">
+          <span>Learn More</span>
+          <div class="link-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </a>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" style="--card-color: #A599E9;">
         <div class="service-icon">
           <i class="fas fa-brain"></i>
+          <div class="icon-sparkle"></div>
         </div>
         <h3>Advanced Analytics & OLAP</h3>
         <p>
           Multidimensional analysis and advanced analytics that uncover patterns,
           insights, and opportunities hidden within your data.
         </p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        <div class="tech-tags">
+          <span>Machine Learning</span>
+          <span>Predictive Analytics</span>
+          <span>OLAP Cubes</span>
+        </div>
+        <a href="#" class="service-link">
+          <span>Learn More</span>
+          <div class="link-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- VISUAL BREAK -->
   <section class="visual-break">
+    <div class="color-overlay"></div>
     <video autoplay muted loop playsinline>
       <source src="asset/14471989_3840_2160_30fps.mp4" type="video/mp4">
     </video>
-    <div class="visual-text">Clarity. Intelligence. Impact.</div>
+    <div class="visual-text">
+      <span class="visual-word" style="--word-color: #FF6B6B;">Clarity.</span>
+      <span class="visual-word" style="--word-color: #4ECDC4;">Intelligence.</span>
+      <span class="visual-word" style="--word-color: #FFD166;">Impact.</span>
+    </div>
+    <div class="floating-shapes">
+      <div class="shape circle"></div>
+      <div class="shape triangle"></div>
+      <div class="shape square"></div>
+    </div>
   </section>
 
   <!-- WHY -->
@@ -194,60 +320,68 @@
     <div class="why-container">
       <div class="why-content">
         <div class="why-text">
-          <h2>Why Organizations Choose Vertizone</h2>
+          <div class="section-badge">Our Advantage</div>
+          <h2>Why Choose <span class="gradient-text">Vertizone</span></h2>
           <p class="why-subtitle">We combine deep technical expertise with business acumen to deliver solutions that drive measurable value and competitive advantage.</p>
           
           <ul class="why-list">
             <li>
-              <i class="fas fa-check-circle"></i>
-              <div>
+              <div class="why-icon" style="--icon-color: #FF6B6B;">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <div class="why-content">
                 <h4>Purpose-built data solutions</h4>
                 <p>Aligned to your specific business goals and outcomes, not generic templates.</p>
               </div>
             </li>
             <li>
-              <i class="fas fa-check-circle"></i>
-              <div>
+              <div class="why-icon" style="--icon-color: #4ECDC4;">
+                <i class="fas fa-expand-arrows-alt"></i>
+              </div>
+              <div class="why-content">
                 <h4>Scalable and future-ready architecture</h4>
                 <p>Designed to grow with your business and adapt to emerging technologies.</p>
               </div>
             </li>
             <li>
-              <i class="fas fa-check-circle"></i>
-              <div>
+              <div class="why-icon" style="--icon-color: #FFD166;">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <div class="why-content">
                 <h4>Strong focus on measurable outcomes</h4>
                 <p>Trackable ROI and tangible business impact with clear success metrics.</p>
               </div>
             </li>
             <li>
-              <i class="fas fa-check-circle"></i>
-              <div>
+              <div class="why-icon" style="--icon-color: #A599E9;">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <div class="why-content">
                 <h4>Transparent, collaborative engagement model</h4>
                 <p>Partnership approach with regular communication and progress updates.</p>
-              </div>
-            </li>
-            <li>
-              <i class="fas fa-check-circle"></i>
-              <div>
-                <h4>Industry-specific expertise</h4>
-                <p>Deep understanding of data challenges across different sectors and domains.</p>
-              </div>
-            </li>
-            <li>
-              <i class="fas fa-check-circle"></i>
-              <div>
-                <h4>End-to-end implementation support</h4>
-                <p>From strategy to deployment and ongoing optimization.</p>
               </div>
             </li>
           </ul>
         </div>
 
         <div class="why-image">
-          <img src="asset/pexels-googledeepmind-25626428.jpg" alt="Advanced Analytics and AI Visualization">
-          <div class="image-overlay">
-            <h3>Proven Results</h3>
-            <p>Join 200+ enterprises that trust Vertizone for their data transformation journey.</p>
+          <div class="image-frame">
+            <img src="asset/pexels-googledeepmind-25626428.jpg" alt="Advanced Analytics and AI Visualization">
+            <div class="image-gradient"></div>
+          </div>
+          <div class="stats-overlay">
+            <div class="stat-bubble" style="--bubble-color: #FF6B6B;">
+              <div class="bubble-number">200+</div>
+              <div class="bubble-text">Enterprises</div>
+            </div>
+            <div class="stat-bubble" style="--bubble-color: #4ECDC4;">
+              <div class="bubble-number">98%</div>
+              <div class="bubble-text">Satisfaction</div>
+            </div>
+            <div class="stat-bubble" style="--bubble-color: #FFD166;">
+              <div class="bubble-number">150+</div>
+              <div class="bubble-text">Projects</div>
+            </div>
           </div>
         </div>
       </div>
@@ -256,34 +390,60 @@
 
   <!-- CTA -->
   <section class="cta">
+    <div class="cta-gradient"></div>
     <div class="cta-container">
       <h2>Ready to Unlock the Full Potential of Your Data?</h2>
       <p class="cta-subtitle">Schedule a free consultation with our data experts to explore how Vertizone can transform your data into strategic assets.</p>
+      
+      <div class="cta-features">
+        <div class="feature" style="--feature-color: #FF6B6B;">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <span>Free 30-minute consultation</span>
+        </div>
+        <div class="feature" style="--feature-color: #4ECDC4;">
+          <div class="feature-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <span>Custom solution roadmap</span>
+        </div>
+        <div class="feature" style="--feature-color: #FFD166;">
+          <div class="feature-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <span>No-obligation insights</span>
+        </div>
+      </div>
+      
       <div class="cta-buttons">
-        <a href="#" class="btn-primary">Request a Free Consultation</a>
-        <a href="https://wa.me/9845212286" class="btn-whatsapp" target="_blank">
-          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        <a href="#" class="btn-primary rainbow-hover btn-large">
+          <span>Request a Free Consultation</span>
+          <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER - Reduced size -->
   <footer class="footer">
+    <div class="footer-wave"></div>
     <div class="footer-container">
       <div class="footer-main">
         <div class="footer-brand">
-          <img src="asset/logo.png" alt="Vertizone" class="footer-logo">
+          <div class="logo-container">
+            <img src="asset/logo.png" alt="Vertizone" class="footer-logo">
+            <div class="logo-glow"></div>
+          </div>
           <p class="footer-description">
             Transforming data into strategic business intelligence. 
             Enterprise-grade data engineering, analytics, and BI solutions.
           </p>
           <div class="footer-social">
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/9845212286" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="LinkedIn" style="--social-color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Twitter" style="--social-color: #1DA1F2;"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook" style="--social-color: #1877F2;"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="YouTube" style="--social-color: #FF0000;"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
         
@@ -316,7 +476,7 @@
               <li><a href="#">About Us</a></li>
               <li><a href="#">Careers</a></li>
               <li><a href="#">Case Studies</a></li>
-              <li><a href="#">Blog & Insights</a></li>
+              <li><a href="#">Blog</a></li>
               <li><a href="#">Contact Us</a></li>
             </ul>
           </div>
@@ -346,10 +506,6 @@
                 <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
               </li>
             </ul>
-            <a href="https://wa.me/9845212286" class="footer-whatsapp-btn" target="_blank">
-              <i class="fab fa-whatsapp"></i>
-              <span>Message on WhatsApp</span>
-            </a>
           </div>
         </div>
       </div>
@@ -372,6 +528,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating WhatsApp Button - Only at bottom -->
+  <a href="https://wa.me/9845212286" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <div class="float-glow"></div>
+  </a>
 
   <script src="script.js"></script>
 </body>

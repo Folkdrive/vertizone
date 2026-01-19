@@ -1,0 +1,423 @@
+/* Services Page Specific Styles */
+
+/* SERVICES HERO */
+.services-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 500px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.services-hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.services-hero .color-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(11, 28, 45, 0.85) 0%,
+        rgba(255, 107, 107, 0.25) 50%,
+        rgba(11, 28, 45, 0.85) 100%);
+    z-index: 1;
+}
+
+.services-hero-content {
+    position: relative;
+    max-width: 900px;
+    color: #fff;
+    text-align: center;
+    padding: 0 40px;
+    z-index: 2;
+    animation: heroFadeIn 1s ease forwards;
+}
+
+.services-hero h1 {
+    font-size: 3.2rem;
+    line-height: 1.2;
+    margin: 20px 0;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.services-hero p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+/* SERVICES OVERVIEW */
+.services-overview {
+    padding: 80px 0;
+    background: #ffffff;
+}
+
+.overview-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.services-process {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 20px;
+}
+
+.process-step {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 30px 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border-top: 4px solid var(--step-color, var(--primary-color));
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.process-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--step-color, var(--primary-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.process-step h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.process-step p {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.process-arrow {
+    color: var(--accent-teal);
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+/* DETAILED SERVICES */
+.detailed-services {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.service-detail-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    border-left: 5px solid var(--service-color, var(--primary-color));
+}
+
+.service-detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.service-detail-header {
+    padding: 40px 40px 20px;
+    background: linear-gradient(135deg, 
+        rgba(var(--service-color-rgb, 24, 165, 88), 0.05), 
+        rgba(var(--service-color-rgb, 24, 165, 88), 0.02));
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.detail-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, 
+        rgba(var(--service-color-rgb, 24, 165, 88), 0.1), 
+        rgba(var(--service-color-rgb, 24, 165, 88), 0.2));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: var(--service-color, var(--primary-color));
+    font-size: 2.5rem;
+    position: relative;
+}
+
+.service-detail-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.service-tagline {
+    font-size: 1.1rem;
+    color: var(--service-color, var(--primary-color));
+    font-weight: 600;
+    font-style: italic;
+    margin: 0;
+}
+
+.service-detail-content {
+    padding: 30px 40px 40px;
+}
+
+.service-detail-content > p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    margin-bottom: 30px;
+}
+
+.capabilities {
+    margin-bottom: 30px;
+}
+
+.capabilities h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.capabilities h4::before {
+    content: '';
+    width: 30px;
+    height: 3px;
+    background: var(--service-color, var(--primary-color));
+}
+
+.capabilities ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.capabilities li {
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+    line-height: 1.6;
+    color: var(--text-medium);
+}
+
+.capabilities li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--service-color, var(--primary-color));
+    font-weight: bold;
+}
+
+.tech-stack h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tech-stack h4::before {
+    content: '';
+    width: 30px;
+    height: 3px;
+    background: var(--service-color, var(--primary-color));
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-tags span {
+    background: rgba(var(--service-color-rgb, 24, 165, 88), 0.1);
+    color: var(--service-color, var(--primary-color));
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tech-tags span:hover {
+    background: var(--service-color, var(--primary-color));
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* SERVICES CTA */
+.services-cta {
+    padding: 80px 0;
+    background: #0b1c2d;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1200px) {
+    .overview-container,
+    .services-container {
+        padding: 0 30px;
+    }
+    
+    .services-hero h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .services-hero {
+        height: 50vh;
+        min-height: 400px;
+    }
+    
+    .services-hero h1 {
+        font-size: 2.4rem;
+    }
+    
+    .services-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .services-process {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .process-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .process-step {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .service-detail-header,
+    .service-detail-content {
+        padding: 30px 25px;
+    }
+    
+    .service-detail-header h3 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-hero {
+        height: 45vh;
+        min-height: 350px;
+        margin-top: 70px;
+    }
+    
+    .services-hero-content {
+        padding: 0 20px;
+    }
+    
+    .services-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .services-hero p {
+        font-size: 1rem;
+    }
+    
+    .overview-container,
+    .services-container {
+        padding: 0 20px;
+    }
+    
+    .services-overview,
+    .detailed-services {
+        padding: 60px 0;
+    }
+    
+    .service-detail-header h3 {
+        font-size: 1.6rem;
+    }
+    
+    .detail-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .tech-tags span {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .service-detail-header,
+    .service-detail-content {
+        padding: 25px 20px;
+    }
+    
+    .service-detail-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .service-tagline {
+        font-size: 1rem;
+    }
+    
+    .service-detail-content > p {
+        font-size: 1rem;
+    }
+}
