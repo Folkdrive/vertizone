@@ -62,7 +62,7 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 9999;
+  z-index: 9997; /* Reduced z-index to be below WhatsApp */
   animation: robotPeek 40s infinite ease-in-out;
   pointer-events: none;
   transform-origin: center bottom;
@@ -460,7 +460,7 @@ body {
   }
 }
 
-/* WhatsApp Floating Button */
+/* WhatsApp Floating Button - FIXED: Now visible on mobile */
 .whatsapp-float {
   position: fixed;
   bottom: 30px;
@@ -470,15 +470,17 @@ body {
   background: #25D366;
   color: white;
   border-radius: 50%;
-  display: flex;
+  display: flex !important; /* Force display */
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
   text-decoration: none;
-  z-index: 9998; /* Just below robot */
+  z-index: 9999; /* Highest z-index */
   box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
   transition: all 0.3s ease;
   animation: whatsappFloat 3s ease-in-out infinite;
+  visibility: visible !important; /* Force visibility */
+  opacity: 1 !important; /* Force opacity */
 }
 
 @keyframes whatsappFloat {
@@ -506,7 +508,7 @@ body {
   box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
 }
 
-/* HEADER */
+/* HEADER - FIXED: Added padding-top for hero content */
 .header {
   position: fixed;
   top: 0;
@@ -664,62 +666,80 @@ body {
   100% { transform: scale(1.3); opacity: 0; }
 }
 
-/* Mobile Toggle */
+/* Mobile Toggle - FIXED: Made visible */
 .mobile-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  width: 30px;
-  height: 20px;
+  width: 40px; /* Increased for better touch */
+  height: 30px;
   position: relative;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  z-index: 1001; /* Ensure it's above other elements */
 }
 
 .mobile-toggle span {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 3px; /* Thicker for visibility */
   background: var(--text-dark);
   transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Mobile toggle active state */
+.mobile-toggle.active span:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+.mobile-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active span:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
 }
 
 /* FIXED: Mobile Navigation - Improved for mobile */
 .mobile-nav {
   display: none;
-  position: absolute;
-  top: 100%;
+  position: fixed; /* Changed from absolute to fixed */
+  top: 0;
   left: 0;
   width: 100%;
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px 0;
-  transform: translateY(-20px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  padding-top: 80px; /* Space for header */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
 }
 
 .mobile-nav.active {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
+  transform: translateX(0);
+  display: block;
 }
 
 .mobile-nav ul {
   list-style: none;
+  padding: 20px 0;
 }
 
 .mobile-nav-link {
   display: block;
-  padding: 16px 64px;
+  padding: 18px 64px;
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 500;
   transition: all 0.3s ease;
   font-size: 1.1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .mobile-nav-link:hover,
@@ -731,6 +751,7 @@ body {
 .mobile-nav-link.phone {
   color: var(--primary-color);
   font-weight: 600;
+  background: rgba(24, 165, 88, 0.1);
 }
 
 /* Button Styles */
@@ -1770,7 +1791,7 @@ body {
   }
   
   .mobile-toggle {
-    display: flex;
+    display: flex; /* Now visible */
   }
   
   .mobile-nav {
@@ -1906,6 +1927,7 @@ body {
   /* IMPROVED: Better mobile robot animation */
   .robot-container {
     animation: robotPeekMobile 40s infinite ease-in-out;
+    bottom: 80px; /* Move up to avoid WhatsApp button */
   }
   
   @keyframes robotPeekMobile {
@@ -1933,6 +1955,7 @@ body {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
+    z-index: 9999; /* Ensure it's on top */
   }
   
   /* IMPROVED: Better mobile touch targets */
@@ -1950,6 +1973,18 @@ body {
   /* IMPROVED: Mobile navigation spacing */
   .mobile-nav {
     padding: 15px 0;
+  }
+  
+  /* FIXED: Mobile toggle visibility */
+  .mobile-toggle {
+    display: flex;
+    width: 35px;
+    height: 25px;
+  }
+  
+  .mobile-toggle span {
+    height: 3px;
+    background: var(--text-dark);
   }
 }
 
@@ -2027,12 +2062,26 @@ body {
   .footer-description {
     font-size: 0.85rem;
   }
+  
+  /* FIXED: Ensure WhatsApp button is visible */
+  .whatsapp-float {
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+  
+  .robot-container {
+    bottom: 70px; /* Adjust for smaller WhatsApp button */
+  }
 }
 
 /* IMPROVED: For very tall screens (mobile portrait) */
 @media (max-height: 700px) and (max-width: 768px) {
   .robot-container {
     animation: robotPeekMobileCompact 40s infinite ease-in-out;
+    bottom: 70px;
   }
   
   @keyframes robotPeekMobileCompact {
