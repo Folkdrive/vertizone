@@ -533,9 +533,13 @@ body {
   position: relative;
 }
 
+/* HEADER LOGO - INCREASED SIZE */
 .logo {
-  height: 40px;
+  height: 50px; /* Increased from 40px */
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  /* Ensure transparent background */
+  background: transparent !important;
+  mix-blend-mode: multiply;
 }
 
 .logo-glow {
@@ -543,8 +547,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
+  width: 80px; /* Increased from 60px */
+  height: 80px; /* Increased from 60px */
   background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
   opacity: 0.1;
   z-index: -1;
@@ -681,7 +685,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Mobile Navigation */
+/* FIXED: Mobile Navigation - Improved for mobile */
 .mobile-nav {
   display: none;
   position: absolute;
@@ -692,7 +696,7 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px 0;
-  transform: translateY(-10px);
+  transform: translateY(-20px);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -710,11 +714,12 @@ body {
 
 .mobile-nav-link {
   display: block;
-  padding: 12px 64px;
+  padding: 16px 64px;
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 500;
   transition: all 0.3s ease;
+  font-size: 1.1rem;
 }
 
 .mobile-nav-link:hover,
@@ -1518,9 +1523,14 @@ body {
   gap: 15px;
 }
 
+/* FOOTER LOGO - INCREASED SIZE */
 .footer-logo {
-  height: 35px;
+  height: 45px; /* Increased from 35px */
   margin-bottom: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  /* Ensure transparent background */
+  background: transparent !important;
+  mix-blend-mode: multiply;
 }
 
 .footer-description {
@@ -1729,7 +1739,7 @@ body {
   text-decoration: underline;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE - IMPROVED FOR MOBILE */
 @media (max-width: 1200px) {
   .header-container {
     padding: 20px 40px;
@@ -1763,6 +1773,10 @@ body {
     display: flex;
   }
   
+  .mobile-nav {
+    display: block;
+  }
+  
   .why-content {
     flex-direction: column;
     gap: 60px;
@@ -1792,6 +1806,15 @@ body {
     height: 25px;
     top: 10px;
     left: 5px;
+  }
+  
+  /* Increased logo size for tablet */
+  .logo {
+    height: 45px; /* Adjusted for tablet */
+  }
+  
+  .footer-logo {
+    height: 40px; /* Adjusted for tablet */
   }
 }
 
@@ -1880,41 +1903,26 @@ body {
     gap: 30px;
   }
   
+  /* IMPROVED: Better mobile robot animation */
   .robot-container {
     animation: robotPeekMobile 40s infinite ease-in-out;
   }
   
   @keyframes robotPeekMobile {
     0%, 100% {
-      transform: translate(0, 0) scale(1);
+      transform: translate(0, 0) scale(0.8);
       opacity: 1;
     }
-    10% {
-      transform: translate(-30px, -80px) scale(1.05);
-      opacity: 0.9;
-    }
-    20% {
-      transform: translate(calc(100vw - 100px), -150px) scale(1);
-      opacity: 0.8;
-    }
     25% {
-      transform: translate(calc(100vw - 100px), -150px) scale(0.8);
-      opacity: 0.7;
-    }
-    30% {
-      transform: translate(calc(100vw - 100px), -150px) scale(1);
+      transform: translate(-30px, -50px) scale(0.85);
       opacity: 0.9;
-    }
-    40% {
-      transform: translate(calc(50vw - 30px), -100px) scale(1.1);
-      opacity: 0.8;
-    }
-    45% {
-      transform: translate(calc(50vw - 30px), -100px) scale(0.9);
-      opacity: 0.7;
     }
     50% {
-      transform: translate(calc(50vw - 30px), -100px) scale(1);
+      transform: translate(calc(100vw - 100px), -80px) scale(0.8);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translate(calc(50vw - 40px), -60px) scale(0.85);
       opacity: 0.9;
     }
   }
@@ -1925,6 +1933,23 @@ body {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
+  }
+  
+  /* IMPROVED: Better mobile touch targets */
+  .mobile-nav-link {
+    padding: 16px 30px;
+    font-size: 1.1rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    min-height: 48px;
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+  
+  /* IMPROVED: Mobile navigation spacing */
+  .mobile-nav {
+    padding: 15px 0;
   }
 }
 
@@ -1978,5 +2003,62 @@ body {
   .robot-mouth {
     width: 20px;
     height: 6px;
+  }
+  
+  /* IMPROVED: Better small mobile adjustments */
+  .header-container {
+    padding: 12px 15px;
+  }
+  
+  /* Increased logo size for mobile */
+  .logo {
+    height: 40px; /* Adjusted for mobile */
+  }
+  
+  .footer-logo {
+    height: 35px; /* Adjusted for mobile */
+  }
+  
+  .mobile-nav-link {
+    padding: 14px 25px;
+    font-size: 1rem;
+  }
+  
+  .footer-description {
+    font-size: 0.85rem;
+  }
+}
+
+/* IMPROVED: For very tall screens (mobile portrait) */
+@media (max-height: 700px) and (max-width: 768px) {
+  .robot-container {
+    animation: robotPeekMobileCompact 40s infinite ease-in-out;
+  }
+  
+  @keyframes robotPeekMobileCompact {
+    0%, 100% {
+      transform: translate(0, 0) scale(0.7);
+      opacity: 1;
+    }
+    25% {
+      transform: translate(-20px, -30px) scale(0.75);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translate(calc(100vw - 80px), -50px) scale(0.7);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translate(calc(50vw - 30px), -40px) scale(0.75);
+      opacity: 0.9;
+    }
+  }
+  
+  .whatsapp-float {
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
   }
 }

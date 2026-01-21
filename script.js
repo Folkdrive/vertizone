@@ -1,4 +1,4 @@
-// Enhanced script with color animations
+// Enhanced script with random robot peeking and color animations
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile menu toggle
   const mobileToggle = document.querySelector('.mobile-toggle');
@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize color hover effects
     initColorHoverEffects();
+    
+    // Initialize random robot animation
+    initRobotAnimation();
   });
 
   // Pause videos when tab inactive
@@ -127,6 +130,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
+  // RANDOM ROBOT ANIMATION - PEEPS IN ALL CORNERS
+  function initRobotAnimation() {
+    const robot = document.querySelector('.robot-container');
+    if (!robot) return;
+    
+    // Define corner positions (top-left, top-right, bottom-left, bottom-right)
+    const positions = [
+      { x: '20px', y: '20px', scale: 1 },      // Top-left
+      { x: 'calc(100vw - 100px)', y: '20px', scale: 1 }, // Top-right
+      { x: '20px', y: 'calc(100vh - 120px)', scale: 1 }, // Bottom-left
+      { x: 'calc(100vw - 100px)', y: 'calc(100vh - 120px)', scale: 1 }, // Bottom-right
+      { x: 'calc(50vw - 40px)', y: '20px', scale: 0.8 }, // Top-center
+      { x: 'calc(50vw - 40px)', y: 'calc(100vh - 120px)', scale: 0.8 }, // Bottom-center
+      { x: '20px', y: 'calc(50vh - 40px)', scale: 0.9 }, // Left-center
+      { x: 'calc(100vw - 100px)', y: 'calc(50vh - 40px)', scale: 0.9 }, // Right-center
+      { x: 'calc(25vw - 40px)', y: 'calc(25vh - 40px)', scale: 0.7 }, // Quarter positions
+      { x: 'calc(75vw - 40px)', y: 'calc(25vh - 40px)', scale: 0.7 },
+      { x: 'calc(25vw - 40px)', y: 'calc(75vh - 40px)', scale: 0.7 },
+      { x: 'calc(75vw - 40px)', y: 'calc(75vh - 40px)', scale: 0.7 }
+    ];
+    
+    let currentIndex = 0;
+    
+    function moveRobot() {
+      // Get random position (different from current)
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * positions.length);
+      } while (newIndex === currentIndex && positions.length > 1);
+      
+      currentIndex = newIndex;
+      const pos = positions[currentIndex];
+      
+      // Random animation duration (3-8 seconds)
+      const duration = 3000 + Math.random() * 5000;
+      
+      // Apply animation
+      robot.style.transition = `all ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      robot.style.transform = `translate(${pos.x}, ${pos.y}) scale(${pos.scale})`;
+      robot.style.opacity = '0.9';
+      
+      // Random rotation
+      const rotation = Math.random() * 20 - 10; // -10 to 10 degrees
+      robot.style.rotate = `${rotation}deg`;
+      
+      // Schedule next move
+      setTimeout(() => {
+        // Fade out slightly before next move
+        robot.style.opacity = '0.6';
+        setTimeout(moveRobot, 500 + Math.random() * 1000);
+      }, duration);
+    }
+    
+    // Start the animation after initial delay
+    setTimeout(moveRobot, 2000);
+  }
+  
   function createRippleEffect(element, event) {
     const ripple = document.createElement('span');
     const rect = element.getBoundingClientRect();
@@ -156,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   function initCounterAnimations() {
-    const counters = document.querySelectorAll('.stat-number');
+    const counters = document.querySelectorAll('.stat-number[data-count]');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -169,7 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const timer = setInterval(() => {
             current += step;
             if (current >= target) {
-              counter.textContent = target + (counter.getAttribute('data-count') > 50 ? '+' : '');
+              // Add plus sign for all stats as requested
+              counter.textContent = target + '+';
               clearInterval(timer);
             } else {
               counter.textContent = Math.floor(current);
@@ -203,6 +264,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
+  // Update active navigation based on current page
+  function updateActiveNav() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const linkHref = link.getAttribute('href');
+      if (linkHref === currentPage || 
+          (currentPage === '' && linkHref === 'index.html') ||
+          (linkHref.includes(currentPage.replace('.html', '')) && currentPage !== 'index.html')) {
+        link.classList.add('active');
+      }
+    });
+  }
+  
+  updateActiveNav();
+  
   // Initialize on load
   initParticleAnimation();
 });
@@ -216,6 +295,42 @@ if (!document.querySelector('#ripple-styles')) {
       to {
         transform: scale(4);
         opacity: 0;
+      }
+    }
+    
+    /* Update robot container styles for new animation */
+    .robot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      pointer-events: none;
+      transform-origin: center;
+      opacity: 0.8;
+      transition: all 3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .robot {
+      width: 80px;
+      height: 100px;
+      position: relative;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+      transition: transform 0.3s ease;
+    }
+    
+    .robot:hover {
+      transform: scale(1.1);
+    }
+    
+    @media (max-width: 768px) {
+      .robot-container {
+        width: 60px;
+        height: 80px;
+      }
+      
+      .robot {
+        width: 60px;
+        height: 80px;
       }
     }
   `;
