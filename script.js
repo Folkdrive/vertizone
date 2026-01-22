@@ -1,4 +1,4 @@
-// Enhanced script with random robot peeking and color animations
+// Optimized script with performance improvements
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile menu toggle
   const mobileToggle = document.querySelector('.mobile-toggle');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Hero text fade-in
   window.addEventListener("load", () => {
-    document.querySelector(".hero-content").classList.add("show");
+    document.querySelector(".hero-content")?.classList.add("show");
     
     // Initialize counter animations
     initCounterAnimations();
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize color hover effects
     initColorHoverEffects();
     
-    // Initialize random robot animation
+    // Initialize optimized robot animation
     initRobotAnimation();
   });
 
@@ -70,43 +70,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  // Enhanced hover effect for service cards
-  document.querySelectorAll('.service-card').forEach(card => {
+  // Enhanced hover effect for service cards - OPTIMIZED
+  const serviceCards = document.querySelectorAll('.service-card');
+  serviceCards.forEach(card => {
+    let hoverTimeout;
+    
     card.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimeout);
       card.style.transform = 'translateY(-15px) rotateX(5deg)';
       card.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.15)';
     });
     
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0) rotateX(0)';
-      card.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.1)';
+      hoverTimeout = setTimeout(() => {
+        card.style.transform = 'translateY(0) rotateX(0)';
+        card.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.1)';
+      }, 50);
     });
   });
   
-  // Enhanced trust items hover
-  document.querySelectorAll('.trust-item').forEach(item => {
+  // Enhanced trust items hover - OPTIMIZED
+  const trustItems = document.querySelectorAll('.trust-item');
+  trustItems.forEach(item => {
+    let hoverTimeout;
+    
     item.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimeout);
       item.style.transform = 'translateY(-10px) scale(1.05)';
     });
     
     item.addEventListener('mouseleave', () => {
-      item.style.transform = 'translateY(0) scale(1)';
+      hoverTimeout = setTimeout(() => {
+        item.style.transform = 'translateY(0) scale(1)';
+      }, 50);
     });
   });
   
-  // Color change on scroll
+  // Color change on scroll - OPTIMIZED with requestAnimationFrame
+  let scrollTimeout;
   window.addEventListener('scroll', () => {
-    const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    
-    // Update CSS variables based on scroll position
-    document.documentElement.style.setProperty('--scroll-percentage', scrollPercentage);
-    
-    // Add parallax effect to floating shapes
-    const shapes = document.querySelectorAll('.shape');
-    shapes.forEach((shape, index) => {
-      const speed = 0.5 + (index * 0.1);
-      shape.style.transform = `translateY(${window.scrollY * speed * 0.1}px)`;
-    });
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      
+      // Update CSS variables based on scroll position
+      document.documentElement.style.setProperty('--scroll-percentage', scrollPercentage);
+      
+      // Add parallax effect to floating shapes - OPTIMIZED
+      const shapes = document.querySelectorAll('.shape');
+      if (shapes.length > 0) {
+        requestAnimationFrame(() => {
+          shapes.forEach((shape, index) => {
+            const speed = 0.5 + (index * 0.1);
+            shape.style.transform = `translateY(${window.scrollY * speed * 0.1}px)`;
+          });
+        });
+      }
+    }, 16); // ~60fps
   });
   
   // Initialize interactive elements
@@ -130,30 +150,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // RANDOM ROBOT ANIMATION - PEEPS IN ALL CORNERS
+  // OPTIMIZED ROBOT ANIMATION - Reduced reflows
   function initRobotAnimation() {
     const robot = document.querySelector('.robot-container');
     if (!robot) return;
     
-    // Define corner positions (top-left, top-right, bottom-left, bottom-right)
+    // Define corner positions
     const positions = [
-      { x: '20px', y: '20px', scale: 1 },      // Top-left
-      { x: 'calc(100vw - 100px)', y: '20px', scale: 1 }, // Top-right
-      { x: '20px', y: 'calc(100vh - 120px)', scale: 1 }, // Bottom-left
-      { x: 'calc(100vw - 100px)', y: 'calc(100vh - 120px)', scale: 1 }, // Bottom-right
-      { x: 'calc(50vw - 40px)', y: '20px', scale: 0.8 }, // Top-center
-      { x: 'calc(50vw - 40px)', y: 'calc(100vh - 120px)', scale: 0.8 }, // Bottom-center
-      { x: '20px', y: 'calc(50vh - 40px)', scale: 0.9 }, // Left-center
-      { x: 'calc(100vw - 100px)', y: 'calc(50vh - 40px)', scale: 0.9 }, // Right-center
-      { x: 'calc(25vw - 40px)', y: 'calc(25vh - 40px)', scale: 0.7 }, // Quarter positions
-      { x: 'calc(75vw - 40px)', y: 'calc(25vh - 40px)', scale: 0.7 },
-      { x: 'calc(25vw - 40px)', y: 'calc(75vh - 40px)', scale: 0.7 },
-      { x: 'calc(75vw - 40px)', y: 'calc(75vh - 40px)', scale: 0.7 }
+      { x: 20, y: 20, scale: 1 },
+      { x: window.innerWidth - 100, y: 20, scale: 1 },
+      { x: 20, y: window.innerHeight - 120, scale: 1 },
+      { x: window.innerWidth - 100, y: window.innerHeight - 120, scale: 1 },
     ];
     
     let currentIndex = 0;
+    let animationFrameId;
+    let lastMoveTime = 0;
+    const MOVE_INTERVAL = 5000; // Move every 5 seconds instead of continuous
     
-    function moveRobot() {
+    function moveRobot(timestamp) {
+      if (!timestamp) timestamp = 0;
+      
+      // Only move every 5 seconds to reduce reflows
+      if (timestamp - lastMoveTime < MOVE_INTERVAL) {
+        animationFrameId = requestAnimationFrame(moveRobot);
+        return;
+      }
+      
+      lastMoveTime = timestamp;
+      
       // Get random position (different from current)
       let newIndex;
       do {
@@ -163,28 +188,27 @@ document.addEventListener('DOMContentLoaded', () => {
       currentIndex = newIndex;
       const pos = positions[currentIndex];
       
-      // Random animation duration (3-8 seconds)
-      const duration = 3000 + Math.random() * 5000;
-      
-      // Apply animation
-      robot.style.transition = `all ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-      robot.style.transform = `translate(${pos.x}, ${pos.y}) scale(${pos.scale})`;
+      // Use transform3d for GPU acceleration
+      robot.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) scale(${pos.scale})`;
       robot.style.opacity = '0.9';
       
       // Random rotation
-      const rotation = Math.random() * 20 - 10; // -10 to 10 degrees
-      robot.style.rotate = `${rotation}deg`;
+      const rotation = Math.random() * 20 - 10;
+      robot.style.transform += ` rotate(${rotation}deg)`;
       
       // Schedule next move
-      setTimeout(() => {
-        // Fade out slightly before next move
-        robot.style.opacity = '0.6';
-        setTimeout(moveRobot, 500 + Math.random() * 1000);
-      }, duration);
+      animationFrameId = requestAnimationFrame(moveRobot);
     }
     
-    // Start the animation after initial delay
-    setTimeout(moveRobot, 2000);
+    // Start the animation
+    animationFrameId = requestAnimationFrame(moveRobot);
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    });
   }
   
   function createRippleEffect(element, event) {
@@ -217,30 +241,39 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function initCounterAnimations() {
     const counters = document.querySelectorAll('.stat-number[data-count]');
+    if (!counters.length) return;
+    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const counter = entry.target;
           const target = parseInt(counter.getAttribute('data-count'));
           const duration = 2000;
-          const step = target / (duration / 16);
+          const startTime = Date.now();
           
-          let current = 0;
-          const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
+          function updateCounter() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+            
+            if (progress < 1) {
+              const current = Math.floor(target * easeProgress);
+              counter.textContent = current;
+              requestAnimationFrame(updateCounter);
+            } else {
               // Add plus sign for all stats as requested
               counter.textContent = target + '+';
-              clearInterval(timer);
-            } else {
-              counter.textContent = Math.floor(current);
+              observer.unobserve(counter);
             }
-          }, 16);
+          }
           
-          observer.unobserve(counter);
+          requestAnimationFrame(updateCounter);
         }
       });
-    }, { threshold: 0.5 });
+    }, { 
+      threshold: 0.5,
+      rootMargin: '0px 0px -50px 0px' // Trigger when 50px from bottom of viewport
+    });
     
     counters.forEach(counter => observer.observe(counter));
   }
@@ -307,7 +340,8 @@ if (!document.querySelector('#ripple-styles')) {
       pointer-events: none;
       transform-origin: center;
       opacity: 0.8;
-      transition: all 3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
+      will-change: transform; /* Hint browser for optimization */
     }
     
     .robot {
@@ -332,6 +366,16 @@ if (!document.querySelector('#ripple-styles')) {
         width: 60px;
         height: 80px;
       }
+    }
+    
+    /* Performance optimizations */
+    * {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    
+    .service-card, .trust-item, .stat-item {
+      will-change: transform, box-shadow;
     }
   `;
   document.head.appendChild(style);

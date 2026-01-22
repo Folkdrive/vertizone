@@ -3,13 +3,14 @@
 /* HERO - FIXED ALIGNMENT */
 .hero {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 80px);
   min-height: 800px;
-  overflow: hidden;
+  overflow: visible; /* CHANGED: From hidden to visible */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 80px; /* Added padding to prevent header overlap */
+  padding-top: 80px; /* Space for fixed header */
+  box-sizing: border-box;
 }
 
 .hero-particles {
@@ -97,13 +98,12 @@
 
 .video-wrapper {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
 }
 
 .hero-video {
@@ -113,10 +113,12 @@
   transform: translate(-50%, -50%);
   min-width: 100%;
   min-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
 }
 
-/* Maintain aspect ratio */
+/* Fix aspect ratio */
 @media (min-aspect-ratio: 16/9) {
   .video-wrapper {
     width: 100%;
@@ -156,7 +158,11 @@
   transform: translateY(30px);
   animation: heroFadeIn 1s ease forwards 0.5s;
   text-align: center;
-  margin-top: 0; /* Removed extra margin since we have padding-top on hero */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 @keyframes heroFadeIn {
@@ -207,6 +213,7 @@
   margin-bottom: 30px;
   font-weight: 700;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
 }
 
 .hero p {
@@ -224,6 +231,7 @@
   margin-top: 40px;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 /* Hero Stats */
@@ -233,6 +241,7 @@
   margin-top: 80px;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .stat-item {
@@ -246,6 +255,9 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+  flex: 1;
+  min-width: 170px;
+  max-width: 200px;
 }
 
 .stat-item::before {
@@ -278,7 +290,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Home Page Responsive */
+/* Home Page Responsive - FIXED FOR MOBILE */
 @media (max-width: 1200px) {
   .hero-content {
     padding: 0 40px;
@@ -307,23 +319,32 @@
 @media (max-width: 768px) {
   .hero {
     min-height: 700px;
-    padding-top: 70px; /* Adjusted for mobile */
+    padding-top: 70px;
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    overflow: hidden; /* Keep hidden on mobile to contain particles */
   }
   
   .hero-content {
-    padding: 0 30px;
+    padding: 0 20px;
     margin-top: 0;
+    justify-content: flex-start;
+    padding-top: 20px;
   }
   
   .hero h1 {
     font-size: 2.2rem;
     margin-bottom: 20px;
+    line-height: 1.3;
+    padding: 0 10px;
   }
   
   .hero p {
     font-size: 1rem;
     margin: 0 auto 30px;
-    padding: 0 10px;
+    padding: 0 15px;
+    line-height: 1.6;
   }
   
   .hero-badge {
@@ -336,45 +357,76 @@
     align-items: center;
     gap: 15px;
     margin-top: 30px;
+    padding: 0 20px;
+    width: 100%;
   }
   
   .btn-primary, .btn-secondary {
     width: 100%;
     max-width: 300px;
-    padding: 14px 28px;
+    padding: 16px 24px;
+    font-size: 1rem;
   }
   
   .hero-stats {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
     margin-top: 50px;
+    padding: 0 20px;
+    justify-content: space-around;
   }
   
   .stat-item {
-    min-width: 250px;
-    padding: 20px;
+    min-width: calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    padding: 20px 15px;
+    margin: 0;
+    flex: none;
+  }
+  
+  .stat-number {
+    font-size: 2.2rem;
+  }
+  
+  /* Fix video for mobile */
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .video-wrapper {
+    width: 100%;
+    height: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
     min-height: 600px;
-    padding-top: 60px; /* Adjusted for smaller mobile */
+    padding-top: 60px;
+    padding-bottom: 30px;
   }
   
   .hero-content {
-    padding: 0 20px;
+    padding: 0 15px;
+    padding-top: 15px;
   }
   
   .hero h1 {
     font-size: 1.8rem;
     margin-bottom: 15px;
+    line-height: 1.3;
+    padding: 0;
   }
   
   .hero p {
     font-size: 0.95rem;
     margin-bottom: 25px;
+    line-height: 1.5;
+    padding: 0;
   }
   
   .hero-badge {
@@ -386,9 +438,19 @@
     font-size: 0.9rem;
   }
   
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+    padding: 0;
+  }
+  
   .hero-stats .stat-item {
-    min-width: 200px;
+    min-width: 100%;
+    max-width: 280px;
     padding: 15px;
+    width: 100%;
   }
   
   .stat-number {
@@ -398,17 +460,31 @@
   .stat-label {
     font-size: 0.9rem;
   }
+  
+  .hero-buttons {
+    padding: 0;
+  }
+  
+  .btn-primary, .btn-secondary {
+    max-width: 280px;
+  }
 }
 
-/* For very tall screens (mobile portrait) */
-@media (max-height: 700px) and (max-width: 768px) {
+/* Fix for landscape mode on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
   .hero {
-    min-height: 600px;
+    min-height: 500px;
     padding-top: 60px;
+    padding-bottom: 20px;
+  }
+  
+  .hero-content {
+    padding-top: 10px;
   }
   
   .hero h1 {
     font-size: 1.8rem;
+    margin-bottom: 15px;
   }
   
   .hero p {
@@ -417,11 +493,41 @@
   }
   
   .hero-stats {
-    margin-top: 30px;
+    margin-top: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
   }
   
   .stat-item {
-    padding: 15px;
-    min-width: 180px;
+    min-width: calc(50% - 15px);
+    max-width: calc(50% - 15px);
+    padding: 10px;
+  }
+  
+  .stat-number {
+    font-size: 1.8rem;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+  
+  .hero p {
+    font-size: 0.9rem;
+  }
+  
+  .stat-item {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    padding: 14px 20px;
+    font-size: 0.95rem;
   }
 }
