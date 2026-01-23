@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize color hover effects
     initColorHoverEffects();
     
-    // Initialize optimized robot animation
+    // Initialize robot animation (desktop only)
     initRobotAnimation();
   });
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 80,
+          top: targetElement.offsetTop - 90,
           behavior: 'smooth'
         });
       }
@@ -150,12 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // OPTIMIZED ROBOT ANIMATION - Reduced reflows
+  // ROBOT ANIMATION - Desktop only (disabled on mobile as requested)
   function initRobotAnimation() {
     const robot = document.querySelector('.robot-container');
     if (!robot) return;
     
-    // Define corner positions
+    // Disable on mobile - return early
+    if (window.innerWidth <= 768) {
+      robot.style.display = 'none';
+      return;
+    }
+    
+    // Define corner positions for desktop only
     const positions = [
       { x: 20, y: 20, scale: 1 },
       { x: window.innerWidth - 100, y: 20, scale: 1 },
@@ -166,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let animationFrameId;
     let lastMoveTime = 0;
-    const MOVE_INTERVAL = 5000; // Move every 5 seconds instead of continuous
+    const MOVE_INTERVAL = 5000;
     
     function moveRobot(timestamp) {
       if (!timestamp) timestamp = 0;
@@ -200,13 +206,28 @@ document.addEventListener('DOMContentLoaded', () => {
       animationFrameId = requestAnimationFrame(moveRobot);
     }
     
-    // Start the animation
-    animationFrameId = requestAnimationFrame(moveRobot);
+    // Start the animation only on desktop
+    if (window.innerWidth > 768) {
+      animationFrameId = requestAnimationFrame(moveRobot);
+    }
     
     // Clean up on page unload
     window.addEventListener('beforeunload', () => {
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
+      }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768 && robot.style.display !== 'none') {
+        robot.style.display = 'none';
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      } else if (window.innerWidth > 768 && robot.style.display === 'none') {
+        robot.style.display = 'block';
+        animationFrameId = requestAnimationFrame(moveRobot);
       }
     });
   }
@@ -272,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { 
       threshold: 0.5,
-      rootMargin: '0px 0px -50px 0px' // Trigger when 50px from bottom of viewport
+      rootMargin: '0px 0px -50px 0px'
     });
     
     counters.forEach(counter => observer.observe(counter));
@@ -341,7 +362,7 @@ if (!document.querySelector('#ripple-styles')) {
       transform-origin: center;
       opacity: 0.8;
       transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
-      will-change: transform; /* Hint browser for optimization */
+      will-change: transform;
     }
     
     .robot {
@@ -358,13 +379,7 @@ if (!document.querySelector('#ripple-styles')) {
     
     @media (max-width: 768px) {
       .robot-container {
-        width: 60px;
-        height: 80px;
-      }
-      
-      .robot {
-        width: 60px;
-        height: 80px;
+        display: none !important;
       }
     }
     
