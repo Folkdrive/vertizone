@@ -1141,12 +1141,13 @@ body {
   background: var(--secondary-color);
 }
 
-/* VISUAL BREAK */
+/* VISUAL BREAK - FIXED FOR MOBILE */
 .visual-break {
   position: relative;
   height: 50vh;
   min-height: 350px;
   background: #0b1c2d;
+  overflow: hidden; /* ADD THIS - prevents overflow */
 }
 
 .color-overlay {
@@ -1182,6 +1183,8 @@ body {
   background: rgba(11, 28, 45, 0.7);
   letter-spacing: 2px;
   z-index: 2;
+  padding: 0 20px; /* ADD THIS - prevents text from touching edges */
+  box-sizing: border-box; /* ADD THIS */
 }
 
 .visual-word {
@@ -1249,6 +1252,99 @@ body {
   transform: rotate(45deg);
 }
 
+/* FIX FOR MOBILE OVERFLOW */
+@media (max-width: 768px) {
+  .visual-break {
+    overflow: hidden !important; /* Force hidden on mobile */
+    min-height: 250px;
+    height: 40vh;
+  }
+  
+  .floating-shapes {
+    display: none; /* Hide floating shapes on mobile - they cause overflow */
+  }
+  
+  .visual-text {
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+    padding: 0 15px; /* Increased padding for mobile */
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .visual-word {
+    font-size: 2rem;
+    padding: 0 8px;
+    margin: 0 2px;
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  
+  .visual-word::after {
+    left: 8px;
+    right: 8px;
+  }
+  
+  /* Ensure video doesn't overflow */
+  .visual-break video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .visual-text {
+    font-size: 1.4rem;
+    gap: 3px;
+    padding: 0 10px;
+  }
+  
+  .visual-word {
+    font-size: 1.7rem;
+    padding: 0 6px;
+  }
+}
+
+/* Landscape mode */
+@media (max-height: 600px) and (orientation: landscape) {
+  .visual-break {
+    height: 35vh;
+    min-height: 200px;
+  }
+  
+  .visual-text {
+    font-size: 1.3rem;
+  }
+  
+  .visual-word {
+    font-size: 1.5rem;
+    padding: 0 5px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .visual-text {
+    font-size: 1.2rem;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .visual-word {
+    font-size: 1.4rem;
+    padding: 0 4px;
+    margin: 2px 0;
+  }
+}
 @keyframes floatShape {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
   33% { transform: translate(30px, -30px) rotate(120deg); }
