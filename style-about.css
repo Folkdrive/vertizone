@@ -1,6 +1,6 @@
 /* About Page Specific Styles */
 
-/* ABOUT HERO */
+/* ABOUT HERO - MATCHED TO HOME PAGE */
 .about-hero {
   position: relative;
   height: 70vh;
@@ -9,7 +9,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
+  padding-top: 90px; /* Changed from margin-top: 80px to match home page */
+  box-sizing: border-box;
 }
 
 .about-hero video {
@@ -224,18 +225,6 @@
   text-align: center;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   animation: pulse 3s infinite;
-}
-.years-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 5px;
-}
-
-.years-text {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 1px;
 }
 
 @keyframes pulse {
@@ -454,7 +443,7 @@
   font-weight: 600;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE - MATCHED TO HOME PAGE MOBILE VIEW */
 @media (max-width: 1200px) {
   .story-container,
   .mv-container,
@@ -513,7 +502,7 @@
   .about-hero {
     height: 50vh;
     min-height: 400px;
-    margin-top: 70px;
+    padding-top: 70px; /* Matched to home page mobile header height */
   }
   
   .about-hero-content {
@@ -598,6 +587,7 @@
   .about-hero {
     height: 40vh;
     min-height: 350px;
+    padding-top: 60px; /* Matched to home page very small mobile */
   }
   
   .about-hero h1 {
@@ -631,4 +621,28 @@
   .value-card {
     padding: 30px 20px;
   }
+}
+
+/* Fix video aspect ratio for mobile - Same as home page */
+@media (min-aspect-ratio: 16/9) {
+  .about-hero video {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .about-hero video {
+    width: auto;
+    height: 100%;
+  }
+}
+
+/* Ensure proper spacing - Matched to home page */
+.about-hero .color-overlay {
+  pointer-events: none;
+}
+
+.about-hero video {
+  pointer-events: none;
 }

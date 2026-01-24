@@ -1,0 +1,9 @@
+{
+  "name": "vertizone",
+  "version": "1.0.0",
+  "description": "Vertizone website for GoDaddy hosting.",
+  "main": "index.html",
+  "scripts": {},
+  "author": "",
+  "license": "ISC"
+}
