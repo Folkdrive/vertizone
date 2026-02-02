@@ -585,15 +585,23 @@
 
 @media (max-width: 480px) {
   .about-hero {
-    height: 40vh;
+    height: 45vh;
     min-height: 350px;
-    padding-top: 60px; /* Matched to home page very small mobile */
+    margin-top: 70px;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
+
+  .about-hero-content {
+    padding: 0 20px;
+  }
+
   .about-hero h1 {
     font-size: 1.8rem;
   }
-  
+
   .about-hero p {
     font-size: 0.9rem;
   }
