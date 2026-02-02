@@ -35,7 +35,7 @@
 .services-hero-content {
     position: relative;
     max-width: 900px;
-    color: black;
+    color: white;
     text-align: center;
     padding: 0 40px;
     z-index: 2;
@@ -53,7 +53,7 @@
 .services-hero p {
     font-size: 1.2rem;
     line-height: 1.7;
-    color: black;
+    color: white;
     max-width: 700px;
     margin: 0 auto 30px;
 }
